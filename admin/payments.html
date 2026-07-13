@@ -1,0 +1,60 @@
+<!-- admin/payments.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পেমেন্ট রিকোয়েস্ট - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; background: #252525; border-radius: 10px; overflow: hidden; margin-top: 20px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; font-size: 0.9rem; }
+        th { background: #000; color: gold; }
+        .approve-btn { background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; }
+        .reject-btn { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-left: 5px; }
+        .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .status-pending { background: #ffc107; color: black; }
+    </style>
+</head>
+<body>
+    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
+
+    <div class="sidebar">
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="payments.html" class="menu-item active"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="ads.html" class="menu-item active"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> SEO সেটিংস</a>
+        
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
+    </div>
+
+    <div class="main-content">
+        <h1>পেমেন্ট রিকোয়েস্ট ম্যানেজমেন্ট</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ইউজার</th>
+                    <th>প্ল্যান</th>
+                    <th>টাকা</th>
+                    <th>মেথড</th>
+                    <th>TrxID</th>
+                    <th>স্ট্যাটাস</th>
+                    <th>অ্যাকশন</th>
+                </tr>
+            </thead>
+            <tbody id="payment-list">
+                <!-- পেমেন্ট রিকোয়েস্ট এখানে লোড হবে -->
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module" src="payments.js"></script>
+</body>
+</html>

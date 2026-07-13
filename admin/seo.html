@@ -1,0 +1,70 @@
+<!-- admin/seo.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO সেটিংস - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .seo-card { background: #252525; padding: 30px; border-radius: 15px; border: 1px solid #333; max-width: 800px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: gold; font-weight: 600; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #111; color: white; outline: none; font-family: inherit; }
+        textarea { height: 100px; }
+        .hint { font-size: 0.8rem; color: #888; margin-top: 5px; }
+        .save-btn { background: #28a745; color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; transition: 0.3s; }
+        .save-btn:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
+
+    <div class="sidebar">
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
+        <a href="seo.html" class="menu-item active"><i class="fas fa-search"></i> SEO সেটিংস</a>
+        <a href="settings.html" class="menu-item active"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
+    </div>
+
+    <div class="main-content">
+        <h1>সার্চ ইঞ্জিন অপ্টিমাইজেশন (SEO)</h1>
+        <p style="color: #888; margin-bottom: 30px;">আপনার ওয়েবসাইটকে গুগল বা অন্যান্য সার্চ ইঞ্জিনে র‍্যাঙ্ক করানোর জন্য নিচের তথ্যগুলো আপডেট করুন।</p>
+
+        <div class="seo-card">
+            <form id="seo-form">
+                <div class="form-group">
+                    <label>ওয়েবসাইট মেটা টাইটেল (Title)</label>
+                    <input type="text" id="seo-title" placeholder="যেমন: ViralLink - Best Trending Videos">
+                    <p class="hint">এটি সার্চ ইঞ্জিনের রেজাল্টে নীল রঙের হেডিং হিসেবে দেখাবে। (৬০ অক্ষরের মধ্যে রাখা ভালো)</p>
+                </div>
+
+                <div class="form-group">
+                    <label>মেটা ডেসক্রিপশন (Description)</label>
+                    <textarea id="seo-desc" placeholder="আপনার সাইট সম্পর্কে বিস্তারিত লিখুন..."></textarea>
+                    <p class="hint">এটি সার্চ রেজাল্টে টাইটেলের নিচের ছোট বর্ণনা। (১৬০ অক্ষরের মধ্যে রাখুন)</p>
+                </div>
+
+                <div class="form-group">
+                    <label>ফোকাস কি-ওয়ার্ডস (Keywords)</label>
+                    <textarea id="seo-keywords" placeholder="keyword1, keyword2, keyword3..."></textarea>
+                    <p class="hint">কমা (,) দিয়ে আলাদা করে আপনার সাইটের মেইন কি-ওয়ার্ডগুলো লিখুন।</p>
+                </div>
+
+                <button type="submit" class="save-btn">SEO আপডেট করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="seo.js"></script>
+</body>
+</html>

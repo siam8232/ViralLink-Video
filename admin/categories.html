@@ -1,0 +1,53 @@
+<!-- admin/categories.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ক্যাটাগরি ম্যানেজার - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .cat-form { background: #252525; padding: 20px; border-radius: 10px; margin-bottom: 30px; display: flex; gap: 10px; }
+        .cat-form input { flex: 1; padding: 12px; border-radius: 5px; border: 1px solid #444; background: #111; color: white; }
+        table { width: 100%; border-collapse: collapse; background: #252525; border-radius: 10px; overflow: hidden; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+        th { background: #000; color: #ff0000; }
+        .del-btn { background: #ff0000; color: white; padding: 5px 12px; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
+
+    <div class="sidebar">
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item active"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="ads.html" class="menu-item active"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> SEO সেটিংস</a>
+        <a href="settings.html" class="menu-item active"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
+    </div>
+
+    <div class="main-content">
+        <h1>ক্যাটাগরি ম্যানেজার</h1>
+        <form id="cat-form" class="cat-form">
+            <input type="text" id="cat-name" placeholder="ক্যাটাগরির নাম (যেমন: মুভি)" required>
+            <button type="submit" class="btn">যোগ করুন</button>
+        </form>
+        <table>
+            <thead>
+                <tr><th>নাম</th><th>অ্যাকশন</th></tr>
+            </thead>
+            <tbody id="cat-list"></tbody>
+        </table>
+    </div>
+
+    <script type="module" src="categories.js"></script>
+</body>
+</html>
