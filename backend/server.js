@@ -1,36 +1,38 @@
-// backend/server.js
+// backend/server.js (Render এর জন্য স্থায়ী সমাধান)
 
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const dotenv = require('dotenv');
 
-dotenv.config();
 const app = express();
 
+// ১. মিডলওয়্যার সেটআপ
 app.use(cors());
 app.use(express.json());
 
-// ১. স্ট্যাটিক ফাইলগুলো সার্ভ করা (সব ফাইল এখন public এর ভেতরে থাকবে)
+// ২. স্ট্যাটিক ফোল্ডারগুলো সার্ভ করা
+// public, admin এবং firebase ফোল্ডারগুলো ব্রাউজারকে চেনানো
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/admin', express.static(path.join(__dirname, '../admin')));
 app.use('/firebase', express.static(path.join(__dirname, '../firebase')));
 
-// ২. হোমপেজ রুট
+// ৩. মেইন রুট (হোমপেজ)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// ৩. অ্যাডমিন পেজ রুট
+// ৪. অ্যাডমিন রুট
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../admin/index.html'));
 });
 
-// ৪. ভুল রুট হ্যান্ডেল করা
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+// ৫. ক্যাচ-অল রুট (যেকোনো লিঙ্কে ঢুকলে ইনডেক্স পেজে পাঠাবে)
+// এটি আগের '*' এর বদলে ব্যবহার করা হচ্ছে যাতে এরর না আসে
+app.use((req, res, next) => {
+    res.status(200).sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+// ৬. সার্ভার পোর্ট
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
