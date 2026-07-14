@@ -1,4 +1,4 @@
-<!-- admin/add-video.html -->
+<!-- public/admin/add-video.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -7,7 +7,7 @@
     <title>নতুন ভিডিও যোগ করুন - ViralLink Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="admin-style.css">
+    <link rel="stylesheet" href="../admin-style.css">
     <style>
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 5px; color: #ccc; }
@@ -28,7 +28,7 @@
         <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
         <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
         <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> SEO সেটিংস</a>
-        <a href="settings.html" class="menu-item active"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
+        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
         <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
 
@@ -39,16 +39,14 @@
                 <label>ভিডিওর টাইটেল</label>
                 <input type="text" id="v-title" required>
             </div>
-            <!-- ক্যাটাগরি ড্রপডাউন -->
             <div class="form-group">
                 <label>ক্যাটাগরি সিলেক্ট করুন</label>
-                <select id="v-category" required>
-                    <option value="">ক্যাটাগরি লোড হচ্ছে...</option>
-                </select>
+                <select id="v-category" required><option value="">লোড হচ্ছে...</option></select>
             </div>
             <div class="form-group">
-                <label>GitHub ভিডিও লিঙ্ক</label>
-                <input type="url" id="v-url" required>
+                <label>GitHub ভিডিও লিঙ্ক অথবা Embed Code</label>
+                <!-- এখানে type="text" করা হয়েছে যাতে এরর না দেয় -->
+                <input type="text" id="v-url" placeholder="লিঙ্ক অথবা <iframe... কোড দিন" required>
             </div>
             <div class="form-group">
                 <label>ImageBB থাম্বনেইল লিঙ্ক</label>
