@@ -9,8 +9,8 @@
     <style>
         body { background: #000; color: white; font-family: 'Poppins', sans-serif; margin: 0; }
         .container { max-width: 1000px; margin: 10px auto; padding: 10px; }
-        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; }
-        video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
+        video { width: 100%; height: 100%; outline: none; }
         .details { margin-top: 20px; background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222; }
         h1 { font-size: 1.3rem; color: #ff0000; margin-bottom: 10px; }
         p { color: #ccc; line-height: 1.6; font-size: 0.9rem; white-space: pre-wrap; }
@@ -20,7 +20,9 @@
 <body>
     <div class="container">
         <a href="/" class="back-btn">← ফিরে যান</a>
-        <div class="player-container" id="player-box"></div>
+        <div class="player-container">
+            <video id="main-player" controls autoplay playsinline controlsList="nodownload"></video>
+        </div>
         <div id="ad-banner-placeholder" style="text-align:center; margin: 20px 0;"></div>
         <div class="details"><h1 id="v-title">লোড হচ্ছে...</h1><p id="v-desc"></p></div>
     </div>
@@ -37,9 +39,8 @@
                     const video = docSnap.data();
                     document.getElementById('v-title').innerText = video.title;
                     document.getElementById('v-desc').innerText = video.description;
-                    const playerBox = document.getElementById('player-box');
-                    if (video.videoType === "embed") playerBox.innerHTML = video.url;
-                    else playerBox.innerHTML = `<video src="${video.url}" controls autoplay playsinline controlsList="nodownload"></video>`;
+                    const player = document.getElementById('main-player');
+                    player.src = video.url;
                     await updateDoc(docRef, { views: increment(1) });
                 }
             };

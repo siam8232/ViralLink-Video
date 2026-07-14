@@ -23,27 +23,28 @@
         <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
         <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
+
     <div class="main-content">
         <h1>নতুন ভিডিও যোগ করুন</h1>
         <form id="video-form" style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
             <div style="margin-bottom:20px;">
-                <label style="display:block; margin-bottom:5px;">ভিডিওর টাইটেল</label>
+                <label>ভিডিওর টাইটেল</label>
                 <input type="text" id="v-title" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
             </div>
             <div style="margin-bottom:20px;">
-                <label style="display:block; margin-bottom:5px;">ক্যাটাগরি</label>
+                <label>ক্যাটাগরি</label>
                 <select id="v-category" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required></select>
             </div>
             <div style="margin-bottom:20px;">
-                <label style="display:block; margin-bottom:5px;">ভিডিও লিঙ্ক অথবা Embed Code</label>
-                <input type="text" id="video-data" placeholder="এখানে লিঙ্ক বা কোড দিন" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
+                <label>GitHub ভিডিও লিঙ্ক</label>
+                <input type="url" id="v-url" placeholder="https://github.com/..." style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
             </div>
             <div style="margin-bottom:20px;">
-                <label style="display:block; margin-bottom:5px;">ImageBB থাম্বনেইল লিঙ্ক</label>
-                <input type="text" id="v-thumb" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
+                <label>ImageBB থাম্বনেইল লিঙ্ক</label>
+                <input type="url" id="v-thumb" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
             </div>
             <div style="margin-bottom:20px;">
-                <label style="display:block; margin-bottom:5px;">ডেসক্রিপশন</label>
+                <label>ডেসক্রিপশন</label>
                 <textarea id="v-desc" rows="4" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;"></textarea>
             </div>
             <button type="submit" style="width:100%; padding:15px; background:red; color:white; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">ভিডিও পাবলিশ করুন</button>

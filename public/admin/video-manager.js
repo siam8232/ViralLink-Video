@@ -11,7 +11,6 @@ onAuthStateChanged(auth, async (user) => {
     const userSnap = await getDoc(doc(db, "users", user.uid));
     if (!userSnap.exists() || userSnap.data().role !== "admin") { window.location.href = "/"; }
     
-    // ক্যাটাগরি লোড করা
     const querySnapshot = await getDocs(collection(db, "categories"));
     catSelect.innerHTML = '<option value="">ক্যাটাগরি বেছে নিন</option>';
     querySnapshot.forEach((doc) => {
@@ -22,30 +21,24 @@ onAuthStateChanged(auth, async (user) => {
 
 form.onsubmit = async (e) => {
     e.preventDefault();
-    
-    // নতুন আইডি থেকে ডাটা নেওয়া হচ্ছে
-    let videoInput = document.getElementById('video-data').value.trim();
-    let videoType = "direct"; 
+    let videoUrl = document.getElementById('v-url').value.trim();
 
-    if (videoInput.toLowerCase().startsWith("<iframe")) {
-        videoType = "embed";
-    } else if (videoInput.includes("github.com")) {
-        videoInput = videoInput.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/").replace("/raw/", "/");
-        videoType = "direct";
+    // GitHub লিঙ্ককে Raw তে রূপান্তর করার আগের পদ্ধতি
+    if (videoUrl.includes("github.com")) {
+        videoUrl = videoUrl.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/").replace("/raw/", "/");
     }
 
     try {
         await addDoc(collection(db, "videos"), {
             title: document.getElementById('v-title').value,
             category: catSelect.value,
-            url: videoInput, 
-            videoType: videoType, 
+            url: videoUrl,
             thumbnail: document.getElementById('v-thumb').value,
             description: document.getElementById('v-desc').value,
             views: 0,
             createdAt: serverTimestamp()
         });
-        alert("সাফল্য! ভিডিও পাবলিশ হয়েছে। 🎉");
+        alert("ভিডিও সফলভাবে পাবলিশ হয়েছে! 🎉");
         form.reset();
     } catch (error) { alert("ভুল হয়েছে: " + error.message); }
 };
