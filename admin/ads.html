@@ -5,79 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>অ্যাড ম্যানেজার - ViralLink Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
     <style>
-        .ad-card { background: #252525; padding: 25px; border-radius: 20px; margin-bottom: 25px; border: 1px solid #333; }
-        .ad-card h3 { color: gold; margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
-        textarea { width: 100%; height: 120px; background: #111; color: #00ff00; padding: 15px; border-radius: 12px; border: 1px solid #444; font-family: monospace; font-size: 0.85rem; outline: none; margin-bottom: 15px; }
-        .ad-status { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #ccc; }
-        .save-btn { background: #28a745; color: white; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-top: 10px; }
-        .save-btn:hover { background: #218838; transform: scale(1.05); }
+        .ad-card { background: #252525; padding: 25px; border-radius: 15px; margin-bottom: 25px; border: 1px solid #333; }
+        .ad-card h3 { color: gold; margin-bottom: 15px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+        textarea { width: 100%; height: 100px; background: #111; color: #00ff00; padding: 10px; border-radius: 8px; border: 1px solid #444; font-family: monospace; font-size: 0.8rem; }
+        .status-box { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+        .save-btn { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
+    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
 
-    <div id="admin-loading">
-        <h2 style="color: white;">চেক করা হচ্ছে... 🛡️</h2>
-    </div>
-
-    <!-- সাইডবার (ইউজারের সিরিয়াল অনুযায়ী) -->
     <div class="sidebar">
         <h2>ViralLink Admin</h2>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
-        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
-        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
-        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
-        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
-        <a href="ads.html" class="menu-item active"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
-        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
-        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
-        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="ads.html" class="menu-item active"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
 
     <div class="main-content">
-        <h1>বিজ্ঞাপন নিয়ন্ত্রণ (Adstra & Others)</h1>
-        <p style="color: #888; margin-bottom: 30px;">নিচে আপনার বিজ্ঞাপনের স্ক্রিপ্ট কোডগুলো বসান এবং সেভ করুন।</p>
+        <h1>অ্যাডভারটাইজমেন্ট সেটিংস</h1>
+        <p style="color: #888; margin-bottom: 30px;">নিচে Adsterra বা আপনার পছন্দের কোম্পানির অ্যাডের স্ক্রিপ্ট কোডগুলো বসান।</p>
 
         <!-- Popunder Ad -->
         <div class="ad-card">
-            <h3><i class="fas fa-external-link-alt"></i> পপআন্ডার (Popunder) অ্যাড</h3>
-            <textarea id="popunder-code" placeholder="Adsterra থেকে কপি করা পপআন্ডার কোড এখানে পেস্ট করুন..."></textarea>
-            <div class="ad-status">
-                <input type="checkbox" id="popunder-active" style="width: 20px; height: 20px; cursor: pointer;"> 
-                <label>এই বিজ্ঞাপনটি সাইটে চালু করুন</label>
+            <h3>১. পপআন্ডার (Popunder) অ্যাড</h3>
+            <textarea id="popunder-code" placeholder="এখানে পপআন্ডার কোডটি পেস্ট করুন..."></textarea>
+            <div class="status-box">
+                <input type="checkbox" id="popunder-active"> <label>এই অ্যাডটি চালু করুন</label>
             </div>
             <button class="save-btn" onclick="saveAd('popunder')">সেভ করুন</button>
         </div>
 
         <!-- Social Bar Ad -->
         <div class="ad-card">
-            <h3><i class="fas fa-bell"></i> সোশ্যাল বার (Social Bar)</h3>
-            <textarea id="social-code" placeholder="সোশ্যাল বার স্ক্রিপ্ট কোড এখানে দিন..."></textarea>
-            <div class="ad-status">
-                <input type="checkbox" id="social-active" style="width: 20px; height: 20px; cursor: pointer;"> 
-                <label>এই বিজ্ঞাপনটি সাইটে চালু করুন</label>
+            <h3>২. সোশ্যাল বার (Social Bar)</h3>
+            <textarea id="social-code" placeholder="সোশ্যাল বার স্ক্রিপ্ট এখানে দিন..."></textarea>
+            <div class="status-box">
+                <input type="checkbox" id="social-active"> <label>এই অ্যাডটি চালু করুন</label>
             </div>
             <button class="save-btn" onclick="saveAd('social')">সেভ করুন</button>
         </div>
 
         <!-- Banner Ad -->
         <div class="ad-card">
-            <h3><i class="fas fa-image"></i> ব্যানার অ্যাড (Banner)</h3>
-            <textarea id="banner-code" placeholder="ব্যানার অ্যাডের এইচটিএমএল/জেএস কোড এখানে দিন..."></textarea>
-            <div class="ad-status">
-                <input type="checkbox" id="banner-active" style="width: 20px; height: 20px; cursor: pointer;"> 
-                <label>এই বিজ্ঞাপনটি সাইটে চালু করুন</label>
+            <h3>৩. ব্যানার অ্যাড (728x90)</h3>
+            <textarea id="banner-code" placeholder="ব্যানার অ্যাডের কোড এখানে দিন..."></textarea>
+            <div class="status-box">
+                <input type="checkbox" id="banner-active"> <label>এই অ্যাডটি চালু করুন</label>
             </div>
             <button class="save-btn" onclick="saveAd('banner')">সেভ করুন</button>
         </div>
     </div>
 
-    <script type="module" src="admin.js"></script>
     <script type="module" src="ads.js"></script>
-
 </body>
 </html>

@@ -1,51 +1,45 @@
 // admin/seo.js
-
-import { db } from "../firebase/firebase-config.js";
+import { auth, db } from "/firebase/firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const seoForm = document.getElementById('seo-form');
 
-// ১. আগে থেকে সেভ করা SEO ডাটা ডাটাবেস থেকে নিয়ে আসার ফাংশন
+onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "/"; return; }
+    const userSnap = await getDoc(doc(db, "users", user.uid));
+    if (!userSnap.exists() || userSnap.data().role !== "admin") { window.location.href = "/"; }
+    document.getElementById('admin-loading').style.display = 'none';
+    
+    // আগের সেভ করা SEO ডাটা লোড করা
+    loadSEOData();
+});
+
 const loadSEOData = async () => {
-    try {
-        const seoSnap = await getDoc(doc(db, "websiteSettings", "seo"));
-        if (seoSnap.exists()) {
-            const data = seoSnap.data();
-            // ফরমে ডাটাগুলো বসানো
-            document.getElementById('seo-title').value = data.title || "";
-            document.getElementById('seo-desc').value = data.description || "";
-            document.getElementById('seo-keywords').value = data.keywords || "";
-        }
-    } catch (error) {
-        console.error("Load SEO Error:", error);
+    const seoSnap = await getDoc(doc(db, "websiteSettings", "seo"));
+    if (seoSnap.exists()) {
+        const data = seoSnap.data();
+        document.getElementById('seo-title').value = data.title || "";
+        document.getElementById('seo-desc').value = data.description || "";
+        document.getElementById('seo-keywords').value = data.keywords || "";
     }
 };
 
-// ২. SEO ডাটা আপডেট করার ফাংশন
-if (seoForm) {
-    seoForm.onsubmit = async (e) => {
-        e.preventDefault();
+seoForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('seo-title').value;
+    const desc = document.getElementById('seo-desc').value;
+    const keywords = document.getElementById('seo-keywords').value;
 
-        const title = document.getElementById('seo-title').value.trim();
-        const desc = document.getElementById('seo-desc').value.trim();
-        const keywords = document.getElementById('seo-keywords').value.trim();
-
-        try {
-            // ডাটাবেসে 'websiteSettings' কালেকশনের ভেতর 'seo' ডকুমেন্টে সেভ করা
-            await setDoc(doc(db, "websiteSettings", "seo"), {
-                title: title,
-                description: desc,
-                keywords: keywords,
-                updatedAt: new Date()
-            });
-
-            alert("অভিনন্দন! আপনার SEO সেটিংস সফলভাবে আপডেট হয়েছে। ✅");
-        } catch (error) {
-            console.error("Update SEO Error:", error);
-            alert("সেটিংস সেভ করতে সমস্যা হয়েছে: " + error.message);
-        }
-    };
-}
-
-// পেজ লোড হলে আগের ডাটা নিয়ে আসো
-loadSEOData();
+    try {
+        await setDoc(doc(db, "websiteSettings", "seo"), {
+            title: title,
+            description: desc,
+            keywords: keywords,
+            updatedAt: new Date()
+        });
+        alert("SEO সেটিংস সফলভাবে সেভ হয়েছে! ✅");
+    } catch (error) {
+        alert("ভুল হয়েছে: " + error.message);
+    }
+};

@@ -9,69 +9,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
     <style>
-        .seo-card { background: #252525; padding: 30px; border-radius: 20px; border: 1px solid #333; max-width: 800px; }
-        .form-group { margin-bottom: 25px; }
-        label { display: block; margin-bottom: 10px; color: gold; font-weight: 600; font-size: 1rem; }
-        input, textarea { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #444; background: #111; color: white; outline: none; font-family: inherit; }
-        textarea { height: 120px; resize: vertical; }
-        .hint { font-size: 0.8rem; color: #777; margin-top: 8px; font-style: italic; }
-        .save-btn { background: #28a745; color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; width: 100%; transition: 0.3s; }
-        .save-btn:hover { background: #218838; transform: translateY(-2px); }
+        .seo-card { background: #252525; padding: 30px; border-radius: 15px; border: 1px solid #333; max-width: 800px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: gold; font-weight: 600; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #111; color: white; outline: none; font-family: inherit; }
+        textarea { height: 100px; }
+        .hint { font-size: 0.8rem; color: #888; margin-top: 5px; }
+        .save-btn { background: #28a745; color: white; border: none; padding: 15px 30px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; transition: 0.3s; }
+        .save-btn:hover { background: #218838; }
     </style>
 </head>
 <body>
+    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
 
-    <div id="admin-loading">
-        <h2 style="color: white;">চেক করা হচ্ছে... 🛡️</h2>
-    </div>
-
-    <!-- সাইডবার (সিরিয়াল অনুযায়ী) -->
     <div class="sidebar">
         <h2>ViralLink Admin</h2>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
-        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
-        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
-        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
-        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
-        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
-        <a href="seo.html" class="menu-item active"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
-        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
-        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
+        <a href="seo.html" class="menu-item active"><i class="fas fa-search"></i> SEO সেটিংস</a>
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
 
     <div class="main-content">
         <h1>সার্চ ইঞ্জিন অপ্টিমাইজেশন (SEO)</h1>
-        <p style="color: #888; margin-bottom: 30px;">আপনার ওয়েবসাইটকে গুগল র‍্যাঙ্কিং-এ নিয়ে আসার জন্য নিচের তথ্যগুলো নিখুঁতভাবে পূরণ করুন।</p>
+        <p style="color: #888; margin-bottom: 30px;">আপনার ওয়েবসাইটকে গুগল বা অন্যান্য সার্চ ইঞ্জিনে র‍্যাঙ্ক করানোর জন্য নিচের তথ্যগুলো আপডেট করুন।</p>
 
         <div class="seo-card">
             <form id="seo-form">
                 <div class="form-group">
-                    <label>মেটা টাইটেল (Meta Title)</label>
-                    <input type="text" id="seo-title" placeholder="যেমন: ViralLink Video - Watch Trending Viral Videos Online" required>
-                    <p class="hint">টিপস: ৬০ অক্ষরের মধ্যে ব্র্যান্ডের নাম এবং মেইন কি-ওয়ার্ড ব্যবহার করুন।</p>
+                    <label>ওয়েবসাইট মেটা টাইটেল (Title)</label>
+                    <input type="text" id="seo-title" placeholder="যেমন: ViralLink - Best Trending Videos">
+                    <p class="hint">এটি সার্চ ইঞ্জিনের রেজাল্টে নীল রঙের হেডিং হিসেবে দেখাবে। (৬০ অক্ষরের মধ্যে রাখা ভালো)</p>
                 </div>
 
                 <div class="form-group">
-                    <label>মেটা বর্ণনা (Meta Description)</label>
-                    <textarea id="seo-desc" placeholder="আপনার সাইট সম্পর্কে একটি আকর্ষণীয় বর্ণনা লিখুন..." required></textarea>
-                    <p class="hint">টিপস: ১৬০ অক্ষরের মধ্যে একটি আকর্ষণীয় বর্ণনা দিন যা দেখে মানুষ লিঙ্কে ক্লিক করবে।</p>
+                    <label>মেটা ডেসক্রিপশন (Description)</label>
+                    <textarea id="seo-desc" placeholder="আপনার সাইট সম্পর্কে বিস্তারিত লিখুন..."></textarea>
+                    <p class="hint">এটি সার্চ রেজাল্টে টাইটেলের নিচের ছোট বর্ণনা। (১৬০ অক্ষরের মধ্যে রাখুন)</p>
                 </div>
 
                 <div class="form-group">
-                    <label>কি-ওয়ার্ডস (Keywords)</label>
-                    <textarea id="seo-keywords" placeholder="viral videos, trending clips, online streaming, ..."></textarea>
-                    <p class="hint">টিপস: কমা (,) দিয়ে আলাদা করে আপনার সাইটের মেইন কি-ওয়ার্ডগুলো লিখুন।</p>
+                    <label>ফোকাস কি-ওয়ার্ডস (Keywords)</label>
+                    <textarea id="seo-keywords" placeholder="keyword1, keyword2, keyword3..."></textarea>
+                    <p class="hint">কমা (,) দিয়ে আলাদা করে আপনার সাইটের মেইন কি-ওয়ার্ডগুলো লিখুন।</p>
                 </div>
 
-                <button type="submit" class="save-btn">SEO সেটিংস আপডেট করুন ✅</button>
+                <button type="submit" class="save-btn">SEO আপডেট করুন</button>
             </form>
         </div>
     </div>
 
-    <!-- অ্যাডমিন লজিক কানেক্ট করা -->
-    <script type="module" src="admin.js"></script>
     <script type="module" src="seo.js"></script>
-
 </body>
 </html>

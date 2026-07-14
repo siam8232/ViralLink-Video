@@ -1,10 +1,10 @@
-<!-- admin/add-video.html -->
+<!-- admin/edit-video.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নতুন ভিডিও যোগ করুন - ViralLink Admin</title>
+    <title>ভিডিও এডিট করুন - ViralLink Admin</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
@@ -13,32 +13,32 @@
         label { display: block; margin-bottom: 5px; color: #ccc; }
         input, textarea, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #222; color: white; }
         .preview-img { width: 200px; height: 120px; border: 1px dashed #666; margin-top: 10px; display: flex; align-items: center; justify-content: center; }
-        .preview-img img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .preview-img img { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
-    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
+    <div id="admin-loading"><h2>তথ্য চেক করা হচ্ছে...</h2></div>
+
     <div class="sidebar">
         <h2>ViralLink Admin</h2>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
-        <a href="add-video.html" class="menu-item active"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
         <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
         <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
         <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
 
     <div class="main-content">
-        <h1>নতুন ভিডিও যোগ করুন</h1>
-        <form id="video-form" style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
+        <h1>ভিডিও সংশোধন করুন</h1>
+        <form id="edit-form" style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
             <div class="form-group">
                 <label>ভিডিওর টাইটেল</label>
                 <input type="text" id="v-title" required>
             </div>
-            <!-- ক্যাটাগরি ড্রপডাউন -->
             <div class="form-group">
-                <label>ক্যাটাগরি সিলেক্ট করুন</label>
+                <label>ক্যাটাগরি</label>
                 <select id="v-category" required>
-                    <option value="">ক্যাটাগরি লোড হচ্ছে...</option>
+                    <option value="">লোড হচ্ছে...</option>
                 </select>
             </div>
             <div class="form-group">
@@ -48,15 +48,15 @@
             <div class="form-group">
                 <label>ImageBB থাম্বনেইল লিঙ্ক</label>
                 <input type="url" id="v-thumb" required>
-                <div class="preview-img" id="thumb-preview"><span>প্রিভিউ নেই</span><img id="p-img"></div>
+                <div class="preview-img"><img id="p-img"></div>
             </div>
             <div class="form-group">
                 <label>ডেসক্রিপশন</label>
                 <textarea id="v-desc" rows="4"></textarea>
             </div>
-            <button type="submit" class="btn" style="width: 100%; padding: 15px;">ভিডিও পাবলিশ করুন</button>
+            <button type="submit" class="btn" style="background: orange; width: 100%; padding: 15px; border:none; color:black; font-weight:bold; cursor:pointer; border-radius:10px;">পরিবর্তনগুলো সেভ করুন</button>
         </form>
     </div>
-    <script type="module" src="video-manager.js"></script>
+    <script type="module" src="edit-video.js"></script>
 </body>
 </html>

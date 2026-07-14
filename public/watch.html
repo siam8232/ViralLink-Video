@@ -5,30 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ভিডিও দেখুন - ViralLink Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body { background: #000; color: white; font-family: 'Poppins', sans-serif; margin: 0; }
-        .container { max-width: 1000px; margin: 10px auto; padding: 10px; }
-        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; display: flex; align-items: center; justify-content: center; }
-        video, iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .details { margin-top: 20px; background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222; }
-        h1 { font-size: 1.3rem; color: #ff0000; margin-bottom: 10px; }
-        p { color: #ccc; line-height: 1.6; font-size: 0.9rem; white-space: pre-wrap; }
-        .back-btn { display: inline-block; color: #888; text-decoration: none; margin-bottom: 15px; font-size: 0.85rem; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 10px; }
+        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 10px; overflow: hidden; border: 1px solid #333; }
+        video { width: 100%; height: 100%; outline: none; }
+        .details { margin-top: 20px; background: #111; padding: 20px; border-radius: 10px; }
+        h1 { font-size: 1.5rem; margin-bottom: 10px; color: #ff0000; }
+        p { color: #ccc; line-height: 1.6; white-space: pre-wrap; }
+        .back-btn { display: inline-block; color: white; text-decoration: none; margin-bottom: 20px; background: #333; padding: 8px 15px; border-radius: 5px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> ফিরে যান</a>
-        <div class="player-container" id="player-box"><p>ভিডিও লোড হচ্ছে... ⏳</p></div>
+        <a href="/" class="back-btn">← ফিরে যান</a>
+        <div class="player-container">
+            <video id="main-player" controls autoplay playsinline controlsList="nodownload"></video>
+        </div>
+
+        <!-- ১. ভিডিওর ঠিক নিচে ব্যানার অ্যাড দেখা যাবে -->
         <div id="ad-banner-placeholder" style="text-align:center; margin: 20px 0;"></div>
-        <div class="details"><h1 id="v-title">লোড হচ্ছে...</h1><p id="v-desc"></p></div>
+
+        <div class="details">
+            <h1 id="v-title">লোড হচ্ছে...</h1>
+            <p id="v-desc"></p>
+        </div>
     </div>
+
     <script type="module">
         import { db } from "/firebase/firebase-config.js";
         import { doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { initializeAds } from "./js/ads-loader.js";
 
         const urlParams = new URLSearchParams(window.location.search);
         const videoID = urlParams.get('v');
@@ -40,16 +47,17 @@
                 if (docSnap.exists()) {
                     const video = docSnap.data();
                     document.getElementById('v-title').innerText = video.title;
-                    document.getElementById('v-desc').innerText = video.description || "";
-                    const playerBox = document.getElementById('player-box');
-                    if (video.videoType === "embed") playerBox.innerHTML = video.url;
-                    else playerBox.innerHTML = `<video src="${video.url}" controls autoplay playsinline controlsList="nodownload"></video>`;
+                    document.getElementById('v-desc').innerText = video.description;
+                    const player = document.getElementById('main-player');
+                    player.src = video.url;
                     await updateDoc(docRef, { views: increment(1) });
-                    initializeAds();
-                } else { alert("ভিডিও পাওয়া যায়নি!"); window.location.href="/"; }
+                }
             };
             loadVideo();
         }
     </script>
+
+    <!-- ২. অ্যাড লোডার কানেক্ট করা -->
+    <script type="module" src="./js/ads-loader.js"></script>
 </body>
 </html>

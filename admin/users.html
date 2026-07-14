@@ -4,60 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইউজার লিস্ট - ViralLink Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>ইউজার ম্যানেজমেন্ট - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
     <style>
-        .user-avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid red; vertical-align: middle; margin-right: 10px; }
-        .badge { padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; background: #252525; border-radius: 10px; overflow: hidden; margin-top: 20px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid #333; font-size: 0.85rem; }
+        th { background: #000; color: #ff0000; }
+        .user-avatar { width: 35px; height: 35px; border-radius: 50%; vertical-align: middle; margin-right: 10px; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
         .badge-premium { background: gold; color: black; }
         .badge-free { background: #444; color: white; }
-        .badge-admin { background: green; color: white; }
+        .action-btn { background: #444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+        .remove-btn { background: #ff4444; }
     </style>
 </head>
 <body>
+    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
 
-    <div id="admin-loading">
-        <h2 style="color: white;">লোড হচ্ছে... 🛡️</h2>
-    </div>
-
-    <!-- সাইডবার (সিরিয়াল অনুযায়ী) -->
     <div class="sidebar">
         <h2>ViralLink Admin</h2>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
-        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
-        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
-        <a href="users.html" class="menu-item active"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
-        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
-        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
-        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
-        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
-        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="users.html" class="menu-item active"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
 
     <div class="main-content">
         <h1>ইউজার ম্যানেজমেন্ট</h1>
-        
         <table>
             <thead>
                 <tr>
                     <th>ইউজার</th>
                     <th>ইমেইল</th>
                     <th>রোল</th>
-                    <th>মেম্বারশিপ</th>
+                    <th>স্ট্যাটাস</th>
                     <th>মেয়াদ শেষ</th>
+                    <th>অ্যাকশন</th>
                 </tr>
             </thead>
-            <tbody id="admin-user-list">
-                <!-- ইউজার লিস্ট এখানে লোড হবে -->
+            <tbody id="user-list-table">
+                <!-- ইউজার লিস্ট এখানে আসবে -->
             </tbody>
         </table>
     </div>
 
-    <script type="module" src="admin.js"></script>
     <script type="module" src="users.js"></script>
-
 </body>
 </html>

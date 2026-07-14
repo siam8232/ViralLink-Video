@@ -1,79 +1,68 @@
 // admin/categories.js
-
-import { db } from "../firebase/firebase-config.js";
-import { collection, addDoc, getDocs, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { auth, db } from "/firebase/firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { collection, addDoc, getDocs, deleteDoc, doc, getDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const catForm = document.getElementById('cat-form');
-const catTableBody = document.getElementById('admin-cat-list');
+const catList = document.getElementById('cat-list');
 
-// ১. ডাটাবেস থেকে সব ক্যাটাগরি নিয়ে এসে টেবিলে দেখানো
+// ১. অ্যাডমিন চেক
+onAuthStateChanged(auth, async (user) => {
+    if (!user) { window.location.href = "/"; return; }
+    const userSnap = await getDoc(doc(db, "users", user.uid));
+    if (!userSnap.exists() || userSnap.data().role !== "admin") { window.location.href = "/"; }
+    document.getElementById('admin-loading').style.display = 'none';
+    fetchCategories();
+});
+
+// ২. ক্যাটাগরি লিস্ট লোড করা
 const fetchCategories = async () => {
+    const q = query(collection(db, "categories"), orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+    catList.innerHTML = '';
+
+    querySnapshot.forEach((cDoc) => {
+        const cat = cDoc.data();
+        const row = `
+            <tr>
+                <td>${cat.name}</td>
+                <td>
+                    <button class="del-btn" onclick="deleteCategory('${cDoc.id}')">
+                        <i class="fas fa-trash"></i> ডিলিট
+                    </button>
+                </td>
+            </tr>
+        `;
+        catList.innerHTML += row;
+    });
+};
+
+// ৩. নতুন ক্যাটাগরি যোগ করা
+catForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cat-name').value;
+
     try {
-        const q = query(collection(db, "categories"), orderBy("createdAt", "desc"));
-        const querySnapshot = await getDocs(q);
-        
-        catTableBody.innerHTML = ''; // আগের ডাটা মুছে ফেলা
-
-        if (querySnapshot.empty) {
-            catTableBody.innerHTML = '<tr><td colspan="2" style="text-align:center;">কোনো ক্যাটাগরি যোগ করা হয়নি।</td></tr>';
-            return;
-        }
-
-        querySnapshot.forEach((cDoc) => {
-            const cat = cDoc.data();
-            const catID = cDoc.id;
-
-            const row = `
-                <tr>
-                    <td style="font-weight:600; font-size:1rem; color:gold;">${cat.name}</td>
-                    <td>
-                        <button class="del-btn" onclick="deleteCategory('${catID}')">
-                            <i class="fas fa-trash"></i> ডিলিট
-                        </button>
-                    </td>
-                </tr>
-            `;
-            catTableBody.innerHTML += row;
+        await addDoc(collection(db, "categories"), {
+            name: name,
+            createdAt: serverTimestamp()
         });
+        document.getElementById('cat-name').value = '';
+        fetchCategories();
+        alert("ক্যাটাগরি যোগ হয়েছে!");
     } catch (error) {
-        console.error("Fetch Categories Error:", error);
+        alert("এরর: " + error.message);
     }
 };
 
-// ২. নতুন ক্যাটাগরি যোগ করার ফাংশন
-if (catForm) {
-    catForm.onsubmit = async (e) => {
-        e.preventDefault();
-        const catName = document.getElementById('cat-name').value.trim();
-
-        try {
-            await addDoc(collection(db, "categories"), {
-                name: catName,
-                createdAt: serverTimestamp()
-            });
-
-            alert("ক্যাটাগরি সফলভাবে যোগ হয়েছে! ✅");
-            catForm.reset(); // ইনপুট বক্স খালি করা
-            fetchCategories(); // তালিকা আপডেট করা
-        } catch (error) {
-            console.error("Add Category Error:", error);
-            alert("ক্যাটাগরি যোগ করতে সমস্যা হয়েছে।");
-        }
-    };
-}
-
-// ৩. ক্যাটাগরি ডিলিট করার ফাংশন
+// ৪. ক্যাটাগরি ডিলিট করা
 window.deleteCategory = async (id) => {
-    if (confirm("আপনি কি নিশ্চিত যে এই ক্যাটাগরি ডিলিট করতে চান?")) {
+    if (confirm("আপনি কি নিশ্চিত?")) {
         try {
             await deleteDoc(doc(db, "categories", id));
-            fetchCategories(); // তালিকা আপডেট করা
+            fetchCategories();
         } catch (error) {
-            console.error("Delete Category Error:", error);
-            alert("ডিলিট করতে সমস্যা হয়েছে।");
+            alert(error.message);
         }
     }
 };
-
-// পেজ লোড হলে ক্যাটাগরিগুলো নিয়ে আসো
-fetchCategories();

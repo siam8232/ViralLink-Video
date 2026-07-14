@@ -4,20 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Membership - ViralLink Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>প্রিমিয়াম মেম্বারশিপ - ViralLink Video</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background: #000; color: white; padding: 20px; }
         .container { max-width: 600px; margin: 10px auto; }
+        
         .header { text-align: center; margin-bottom: 25px; }
         .header h1 { color: #ff0000; font-size: 1.8rem; }
 
         /* প্ল্যান কার্ড */
         .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .plan-card { background: #111; padding: 15px 5px; border-radius: 12px; border: 2px solid #222; text-align: center; cursor: pointer; transition: 0.2s; }
-        .plan-card.active { border-color: gold; background: #1a1a00; transform: scale(1.05); }
+        .plan-card { 
+            background: #111; padding: 15px 5px; border-radius: 12px; border: 2px solid #222; 
+            text-align: center; cursor: pointer; transition: 0.2s; 
+        }
+        .plan-card.active { border-color: gold; background: #1a1a00; }
         .plan-card h3 { font-size: 0.8rem; color: #888; }
         .plan-card .price { font-size: 1.1rem; font-weight: 700; color: gold; }
 
@@ -27,28 +31,33 @@
         .num-display { font-size: 1.4rem; font-weight: 700; color: #ff0000; letter-spacing: 1px; display: block; margin: 5px 0; }
         .copy-btn { background: #333; color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; font-size: 0.7rem; }
 
-        /* পেমেন্ট মেথড */
+        /* পেমেন্ট মেথড (লোগো কোড) */
         .method-label { display: block; margin-bottom: 12px; color: #888; font-size: 0.8rem; text-align: center; }
         .methods-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-        .method-card { background: #fff; height: 65px; border-radius: 10px; border: 3px solid transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        
+        .method-card { 
+            background: #fff; height: 65px; border-radius: 10px; border: 3px solid transparent; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
+        }
+        .method-card svg, .method-card img { height: 40px; width: auto; }
         .method-card.active { border-color: #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.3); }
 
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; color: #aaa; font-size: 0.8rem; }
         input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: white; outline: none; }
         
-        .btn-submit { background: #ff0000; color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: 0.3s; }
-        .btn-submit:hover { background: #cc0000; }
+        .btn-submit { background: #ff0000; color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; }
         .back-btn { display: inline-block; color: #888; text-decoration: none; margin-bottom: 15px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> ফিরে যান</a>
-        <div class="header"><h1>Premium Membership</h1></div>
+        <a href="/" class="back-btn">← ফিরে যান</a>
+        
+        <div class="header">
+            <h1>Premium Membership</h1>
+        </div>
 
-        <!-- প্ল্যান সিলেকশন -->
         <div class="plans-grid">
             <div class="plan-card" onclick="selectPlan('Monthly', 50, this)">
                 <h3>১ মাস</h3>
@@ -72,11 +81,24 @@
             </div>
 
             <span class="method-label">পেমেন্ট মাধ্যম সিলেক্ট করুন</span>
+            
             <div class="methods-grid">
-                <div class="method-card" style="color:#D12053" onclick="selectMethod('bKash', this)">bKash</div>
-                <div class="method-card" style="color:#F7941D" onclick="selectMethod('Nagad', this)">Nagad</div>
-                <div class="method-card" style="color:#8C3494" onclick="selectMethod('Rocket', this)">Rocket</div>
-                <div class="method-card" style="color:#00ADEF" onclick="selectMethod('Upay', this)">Upay</div>
+                <!-- bKash SVG Logo -->
+                <div class="method-card" onclick="selectMethod('bKash', this)">
+                    <img src="https://raw.githubusercontent.com/SiamIslam-Dev/ViralLink-Assets/main/bkash.png" onerror="this.parentElement.innerHTML='<b style=\'color:#D12053\'>bKash</b>'">
+                </div>
+                <!-- Nagad SVG Logo -->
+                <div class="method-card" onclick="selectMethod('Nagad', this)">
+                    <img src="https://raw.githubusercontent.com/SiamIslam-Dev/ViralLink-Assets/main/nagad.png" onerror="this.parentElement.innerHTML='<b style=\'color:#F7941D\'>Nagad</b>'">
+                </div>
+                <!-- Rocket Logo -->
+                <div class="method-card" onclick="selectMethod('Rocket', this)">
+                    <img src="https://raw.githubusercontent.com/SiamIslam-Dev/ViralLink-Assets/main/rocket.png" onerror="this.parentElement.innerHTML='<b style=\'color:#8C3494\'>Rocket</b>'">
+                </div>
+                <!-- Upay Logo -->
+                <div class="method-card" onclick="selectMethod('Upay', this)">
+                    <img src="https://raw.githubusercontent.com/SiamIslam-Dev/ViralLink-Assets/main/upay.png" onerror="this.parentElement.innerHTML='<b style=\'color:#00ADEF\'>Upay</b>'">
+                </div>
             </div>
             
             <form id="payment-form">
@@ -88,9 +110,11 @@
                     <label>Transaction ID (TrxID)</label>
                     <input type="text" id="trx-id" placeholder="TrxID এখানে লিখুন" required>
                 </div>
+                
                 <input type="hidden" id="selected-plan">
                 <input type="hidden" id="selected-price">
                 <input type="hidden" id="selected-method">
+                
                 <button type="submit" class="btn-submit">রিকোয়েস্ট পাঠান</button>
             </form>
         </div>
@@ -103,16 +127,21 @@
             document.getElementById('selected-plan').value = plan;
             document.getElementById('selected-price').value = price;
         }
+
         function selectMethod(method, element) {
             document.querySelectorAll('.method-card').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
             document.getElementById('selected-method').value = method;
         }
+
         function copyNumber() {
             const num = document.getElementById('pay-num').innerText;
-            navigator.clipboard.writeText(num).then(() => alert("নম্বর কপি হয়েছে!"));
+            navigator.clipboard.writeText(num).then(() => {
+                alert("নম্বর কপি হয়েছে!");
+            });
         }
     </script>
+
     <script type="module" src="./js/premium.js"></script>
 </body>
 </html>
