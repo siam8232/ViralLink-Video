@@ -34,7 +34,8 @@
 
     <div class="main-content">
         <h1>নতুন ভিডিও যোগ করুন</h1>
-        <form id="video-form" style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
+        <!-- এখানে novalidate যোগ করা হয়েছে -->
+        <form id="video-form" novalidate style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
             <div class="form-group">
                 <label>ভিডিওর টাইটেল</label>
                 <input type="text" id="v-title" required>
@@ -44,20 +45,19 @@
                 <select id="v-category" required><option value="">লোড হচ্ছে...</option></select>
             </div>
             <div class="form-group">
-                <label>GitHub ভিডিও লিঙ্ক অথবা Embed Code</label>
-                <!-- এখানে type="text" করা হয়েছে যাতে এরর না দেয় -->
-                <input type="text" id="v-url" placeholder="লিঙ্ক অথবা <iframe... কোড দিন" required>
+                <label>ভিডিও লিঙ্ক অথবা Embed Code</label>
+                <input type="text" id="v-url" placeholder="লিঙ্ক অথবা আইফ্রেম কোড দিন" required>
             </div>
             <div class="form-group">
                 <label>ImageBB থাম্বনেইল লিঙ্ক</label>
-                <input type="url" id="v-thumb" required>
+                <input type="text" id="v-thumb" placeholder="https://i.ibb.co/..." required>
                 <div class="preview-img" id="thumb-preview"><span>প্রিভিউ নেই</span><img id="p-img"></div>
             </div>
             <div class="form-group">
                 <label>ডেসক্রিপশন</label>
                 <textarea id="v-desc" rows="4"></textarea>
             </div>
-            <button type="submit" class="btn" style="width: 100%; padding: 15px;">ভিডিও পাবলিশ করুন</button>
+            <button type="submit" class="btn" style="width: 100%; padding: 15px; background: red; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">ভিডিও পাবলিশ করুন</button>
         </form>
     </div>
     <script type="module" src="video-manager.js"></script>
