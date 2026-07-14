@@ -4,49 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ভিডিও দেখুন</title>
+    <title>ভিডিও দেখুন - ViralLink Video</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #000; color: white; font-family: 'Poppins', sans-serif; margin: 0; }
-        .container { max-width: 1000px; margin: 10px auto; padding: 10px; }
-        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 12px; overflow: hidden; border: 1px solid #333; }
-        video { width: 100%; height: 100%; outline: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #000; color: white; margin: 0; padding-bottom: 50px; }
+        nav { background: #000; padding: 15px 5%; border-bottom: 1px solid #222; }
+        .logo { text-decoration: none; color: red; font-weight: bold; font-size: 1.5rem; }
+        
+        .container { max-width: 1000px; margin: 20px auto; padding: 10px; }
+        
+        /* ভিডিও বক্স ডিজাইন */
+        .player-container { 
+            width: 100%; 
+            aspect-ratio: 16/9; 
+            background: #111; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            border: 1px solid #333; 
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video, iframe { 
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%; 
+            border: none; 
+        }
+
+        /* ডিটেইলস সেকশন */
         .details { margin-top: 20px; background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222; }
         h1 { font-size: 1.3rem; color: #ff0000; margin-bottom: 10px; }
         p { color: #ccc; line-height: 1.6; font-size: 0.9rem; white-space: pre-wrap; }
-        .back-btn { display: inline-block; color: #888; text-decoration: none; margin-bottom: 15px; font-size: 0.85rem; }
+        
+        .back-btn { display: inline-block; color: #888; text-decoration: none; margin-bottom: 15px; font-size: 0.85rem; transition: 0.3s; }
+        .back-btn:hover { color: white; }
     </style>
 </head>
 <body>
+
+    <nav>
+        <a href="/" class="logo">ViralLink Video</a>
+    </nav>
+
     <div class="container">
-        <a href="/" class="back-btn">← ফিরে যান</a>
-        <div class="player-container">
-            <video id="main-player" controls autoplay playsinline controlsList="nodownload"></video>
+        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> হোমপেজে ফিরে যান</a>
+        
+        <!-- ভিডিও প্লেয়ার বক্স -->
+        <div class="player-container" id="player-box">
+            <p>ভিডিও লোড হচ্ছে... ⏳</p>
         </div>
+
+        <!-- ব্যানার অ্যাডের জায়গা -->
         <div id="ad-banner-placeholder" style="text-align:center; margin: 20px 0;"></div>
-        <div class="details"><h1 id="v-title">লোড হচ্ছে...</h1><p id="v-desc"></p></div>
+
+        <!-- টাইটেল ও ডেসক্রিপশন -->
+        <div class="details">
+            <h1 id="v-title">লোড হচ্ছে...</h1>
+            <p id="v-desc"></p>
+        </div>
     </div>
+
     <script type="module">
-        import { db } from "./js/firebase-config.js";
+        import { db } from "/firebase/firebase-config.js";
         import { doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { initializeAds } from "./js/ads-loader.js";
+
+        // URL থেকে ভিডিওর আইডি খুঁজে নেওয়া
         const urlParams = new URLSearchParams(window.location.search);
         const videoID = urlParams.get('v');
+
         if (videoID) {
             const loadVideo = async () => {
                 const docRef = doc(db, "videos", videoID);
                 const docSnap = await getDoc(docRef);
+                
                 if (docSnap.exists()) {
                     const video = docSnap.data();
                     document.getElementById('v-title').innerText = video.title;
-                    document.getElementById('v-desc').innerText = video.description;
-                    const player = document.getElementById('main-player');
-                    player.src = video.url;
+                    document.getElementById('v-desc').innerText = video.description || "কোনো বর্ণনা নেই।";
+                    
+                    const playerBox = document.getElementById('player-box');
+                    
+                    // ভিডিওর ধরন চেক করে প্লেয়ার সেট করা
+                    if (video.videoType === "embed") {
+                        // যদি আইফ্রেম কোড হয়
+                        playerBox.innerHTML = video.url;
+                    } else {
+                        // যদি সরাসরি ভিডিও লিঙ্ক হয়
+                        playerBox.innerHTML = `<video src="${video.url}" controls autoplay playsinline controlsList="nodownload"></video>`;
+                    }
+
+                    // ভিউ ১ বাড়ানো
                     await updateDoc(docRef, { views: increment(1) });
+                    
+                    // বিজ্ঞাপন লোড করা
+                    initializeAds();
+                } else {
+                    alert("দুঃখিত, ভিডিওটি পাওয়া যায়নি!");
+                    window.location.href = "/";
                 }
             };
             loadVideo();
+        } else {
+            window.location.href = "/";
         }
     </script>
-    <script type="module" src="./js/ads-loader.js"></script>
+
 </body>
 </html>

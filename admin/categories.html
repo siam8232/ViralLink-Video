@@ -1,0 +1,72 @@
+<!-- admin/categories.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ক্যাটাগরি ম্যানেজার - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .cat-form-box { background: #252525; padding: 25px; border-radius: 15px; border: 1px solid #333; margin-bottom: 30px; display: flex; gap: 15px; align-items: flex-end; }
+        .cat-form-box .form-group { flex: 1; margin-bottom: 0; }
+        .cat-table-box { background: #252525; padding: 10px; border-radius: 15px; border: 1px solid #333; }
+        .del-btn { background: #ff4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .del-btn:hover { background: #cc0000; }
+    </style>
+</head>
+<body>
+
+    <div id="admin-loading">
+        <h2 style="color: white;">লোড হচ্ছে... 🛡️</h2>
+    </div>
+
+    <!-- সাইডবার (সিরিয়াল অনুযায়ী) -->
+    <div class="sidebar">
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
+        <a href="categories.html" class="menu-item active"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
+        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
+        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
+    </div>
+
+    <div class="main-content">
+        <h1>ক্যাটাগরি ম্যানেজমেন্ট</h1>
+
+        <!-- নতুন ক্যাটাগরি যোগ করার ফর্ম -->
+        <form id="cat-form" class="cat-form-box">
+            <div class="form-group">
+                <label>নতুন ক্যাটাগরির নাম</label>
+                <input type="text" id="cat-name" placeholder="যেমন: মুভি, নাটক, ফানি" required>
+            </div>
+            <button type="submit" class="btn" style="height: 48px;">যোগ করুন</button>
+        </form>
+
+        <!-- ক্যাটাগরি লিস্ট টেবিল -->
+        <div class="cat-table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ক্যাটাগরির নাম</th>
+                        <th style="width: 100px;">অ্যাকশন</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-cat-list">
+                    <!-- ক্যাটাগরিগুলো এখানে আসবে -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+    <script type="module" src="categories.js"></script>
+
+</body>
+</html>

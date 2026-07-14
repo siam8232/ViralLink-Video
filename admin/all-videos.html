@@ -1,0 +1,60 @@
+<!-- admin/all-videos.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সব ভিডিও - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <style>
+        .admin-thumb { width: 100px; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover; border: 1px solid #333; }
+        .del-btn { background: #ff0000; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .del-btn:hover { background: #cc0000; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <div id="admin-loading">
+        <h2 style="color: white;">লোড হচ্ছে... 🛡️</h2>
+    </div>
+
+    <!-- সাইডবার -->
+    <div class="sidebar">
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
+        <a href="all-videos.html" class="menu-item active"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
+        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
+        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
+    </div>
+
+    <div class="main-content">
+        <h1>সব ভিডিওর তালিকা</h1>
+        
+        <table id="videos-table">
+            <thead>
+                <tr>
+                    <th>থাম্বনেইল</th>
+                    <th>ভিডিওর টাইটেল</th>
+                    <th>ভিউ</th>
+                    <th>অ্যাকশন</th>
+                </tr>
+            </thead>
+            <tbody id="admin-video-list">
+                <!-- ভিডিওগুলো এখানে লোড হবে -->
+            </tbody>
+        </table>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+    <script type="module" src="all-videos.js"></script>
+
+</body>
+</html>

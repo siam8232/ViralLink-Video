@@ -1,0 +1,82 @@
+<!-- admin/add-video.html -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>নতুন ভিডিও যোগ করুন - ViralLink Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+
+    <!-- সিকিউরিটি চেক -->
+    <div id="admin-loading">
+        <h2 style="color: white;">চেক করা হচ্ছে... 🛡️</h2>
+    </div>
+
+    <!-- সাইডবার -->
+    <div class="sidebar">
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
+        <a href="add-video.html" class="menu-item active"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
+        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
+        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
+    </div>
+
+    <!-- মেইন কন্টেন্ট -->
+    <div class="main-content">
+        <h1>নতুন ভিডিও যোগ করুন</h1>
+        
+        <form id="video-form">
+            <!-- ভিডিওর নাম -->
+            <div class="form-group">
+                <label>ভিডিওর টাইটেল (Title)</label>
+                <input type="text" id="v-title" placeholder="ভিডিওর সুন্দর একটি নাম দিন" required>
+            </div>
+
+            <!-- ক্যাটাগরি ড্রপডাউন -->
+            <div class="form-group">
+                <label>ক্যাটাগরি সিলেক্ট করুন</label>
+                <select id="v-category" required>
+                    <option value="">ক্যাটাগরি লোড হচ্ছে...</option>
+                </select>
+            </div>
+
+            <!-- ভিডিও লিঙ্ক বা আইফ্রেম -->
+            <div class="form-group">
+                <label>GitHub ভিডিও লিঙ্ক অথবা Embed Code (Iframe)</label>
+                <input type="text" id="v-url" placeholder="লিঙ্ক বা <iframe... কোড এখানে দিন" required>
+                <p style="font-size: 0.75rem; color: #888; margin-top: 5px;">*গিটহাব লিঙ্ক এবং আইফ্রেম কোড—উভয়ই কাজ করবে।</p>
+            </div>
+
+            <!-- থাম্বনেইল লিঙ্ক -->
+            <div class="form-group">
+                <label>ImageBB থাম্বনেইল লিঙ্ক (URL)</label>
+                <input type="text" id="v-thumb" placeholder="ছবির ডিরেক্ট লিঙ্ক দিন (যেমন: https://i.ibb.co/...)" required>
+            </div>
+
+            <!-- ডেসক্রিপশন -->
+            <div class="form-group">
+                <label>ভিডিওর বিস্তারিত (Description)</label>
+                <textarea id="v-desc" rows="4" placeholder="ভিডিও সম্পর্কে কিছু লিখুন..."></textarea>
+            </div>
+
+            <!-- পাবলিশ বাটন -->
+            <button type="submit" class="btn" id="submit-btn" style="width: 100%; font-size: 1.1rem;">ভিডিও পাবলিশ করুন 🚀</button>
+        </form>
+    </div>
+
+    <!-- অ্যাডমিন লজিক কানেক্ট করা -->
+    <script type="module" src="admin.js"></script>
+    <script type="module" src="video-manager.js"></script>
+
+</body>
+</html>
