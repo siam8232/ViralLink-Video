@@ -11,12 +11,12 @@
 </head>
 <body>
 
-    <!-- সিকিউরিটি চেক -->
+    <!-- সিকিউরিটি চেক লোডিং -->
     <div id="admin-loading">
-        <h2 style="color: white;">চেক করা হচ্ছে... 🛡️</h2>
+        <h2 style="color: white; text-align: center;">চেক করা হচ্ছে... 🛡️</h2>
     </div>
 
-    <!-- সাইডবার -->
+    <!-- সাইডবার (সিরিয়াল অনুযায়ী) -->
     <div class="sidebar">
         <h2>ViralLink Admin</h2>
         <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
@@ -33,7 +33,7 @@
 
     <!-- মেইন কন্টেন্ট -->
     <div class="main-content">
-        <h1>নতুন ভিডিও যোগ করুন</h1>
+        <h1>নতুন ভিডিও আপলোড করুন</h1>
         
         <form id="video-form">
             <!-- ভিডিওর নাম -->
@@ -42,7 +42,7 @@
                 <input type="text" id="v-title" placeholder="ভিডিওর সুন্দর একটি নাম দিন" required>
             </div>
 
-            <!-- ক্যাটাগরি ড্রপডাউন -->
+            <!-- ক্যাটাগরি -->
             <div class="form-group">
                 <label>ক্যাটাগরি সিলেক্ট করুন</label>
                 <select id="v-category" required>
@@ -50,11 +50,11 @@
                 </select>
             </div>
 
-            <!-- ভিডিও লিঙ্ক বা আইফ্রেম -->
+            <!-- ভিডিও লিঙ্ক বা আইফ্রেম (এখানে type="text" করা হয়েছে) -->
             <div class="form-group">
                 <label>GitHub ভিডিও লিঙ্ক অথবা Embed Code (Iframe)</label>
                 <input type="text" id="v-url" placeholder="লিঙ্ক বা <iframe... কোড এখানে দিন" required>
-                <p style="font-size: 0.75rem; color: #888; margin-top: 5px;">*গিটহাব লিঙ্ক এবং আইফ্রেম কোড—উভয়ই কাজ করবে।</p>
+                <p style="font-size: 0.75rem; color: #888; margin-top: 5px;">*গিটহাব লিঙ্ক এবং আইফ্রেম কোড—উভয়ই সাপোর্ট করবে।</p>
             </div>
 
             <!-- থাম্বনেইল লিঙ্ক -->
@@ -69,12 +69,11 @@
                 <textarea id="v-desc" rows="4" placeholder="ভিডিও সম্পর্কে কিছু লিখুন..."></textarea>
             </div>
 
-            <!-- পাবলিশ বাটন -->
-            <button type="submit" class="btn" id="submit-btn" style="width: 100%; font-size: 1.1rem;">ভিডিও পাবলিশ করুন 🚀</button>
+            <button type="submit" class="btn" style="width: 100%; font-size: 1.1rem;">ভিডিও পাবলিশ করুন 🚀</button>
         </form>
     </div>
 
-    <!-- অ্যাডমিন লজিক কানেক্ট করা -->
+    <!-- অ্যাডমিন লজিক ও ভিডিও ম্যানেজার কানেক্ট করা -->
     <script type="module" src="admin.js"></script>
     <script type="module" src="video-manager.js"></script>
 
