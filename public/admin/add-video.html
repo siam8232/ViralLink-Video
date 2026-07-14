@@ -1,13 +1,12 @@
-<!-- public/admin/add-video.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নতুন ভিডিও যোগ করুন - ViralLink Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../admin-style.css">
+    <link rel="stylesheet" href="admin-style.css">
 </head>
 <body>
     <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
@@ -24,7 +23,6 @@
         <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
         <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
-
     <div class="main-content">
         <h1>নতুন ভিডিও যোগ করুন</h1>
         <form id="video-form" style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
@@ -36,13 +34,10 @@
                 <label style="display:block; margin-bottom:5px;">ক্যাটাগরি</label>
                 <select id="v-category" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required></select>
             </div>
-            
             <div style="margin-bottom:20px;">
                 <label style="display:block; margin-bottom:5px;">ভিডিও লিঙ্ক অথবা Embed Code</label>
-                <!-- আইডি এবং টাইপ পরিবর্তন করা হয়েছে -->
                 <input type="text" id="video-data" placeholder="এখানে লিঙ্ক বা কোড দিন" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
             </div>
-
             <div style="margin-bottom:20px;">
                 <label style="display:block; margin-bottom:5px;">ImageBB থাম্বনেইল লিঙ্ক</label>
                 <input type="text" id="v-thumb" style="width:100%; padding:12px; border-radius:8px; background:#111; color:white; border:1px solid #444;" required>
