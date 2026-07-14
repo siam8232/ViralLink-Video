@@ -5,14 +5,13 @@ import { doc, getDoc, collection, addDoc, serverTimestamp, getDocs } from "https
 
 const form = document.getElementById('video-form');
 const catSelect = document.getElementById('v-category');
-const thumbInput = document.getElementById('v-thumb');
-const pImg = document.getElementById('p-img');
 
 onAuthStateChanged(auth, async (user) => {
     if (!user) { window.location.href = "/"; return; }
     const userSnap = await getDoc(doc(db, "users", user.uid));
     if (!userSnap.exists() || userSnap.data().role !== "admin") { window.location.href = "/"; }
     
+    // ক্যাটাগরি লোড করা
     const querySnapshot = await getDocs(collection(db, "categories"));
     catSelect.innerHTML = '<option value="">ক্যাটাগরি বেছে নিন</option>';
     querySnapshot.forEach((doc) => {
@@ -21,17 +20,18 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('admin-loading').style.display = 'none';
 });
 
-thumbInput.oninput = () => { if (thumbInput.value) { pImg.src = thumbInput.value; pImg.style.display = 'block'; } };
-
 form.onsubmit = async (e) => {
     e.preventDefault();
-    let videoInput = document.getElementById('v-url').value.trim();
+    
+    // নতুন আইডি থেকে ডাটা নেওয়া হচ্ছে
+    let videoInput = document.getElementById('video-data').value.trim();
     let videoType = "direct"; 
 
     if (videoInput.toLowerCase().startsWith("<iframe")) {
         videoType = "embed";
     } else if (videoInput.includes("github.com")) {
         videoInput = videoInput.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/").replace("/raw/", "/");
+        videoType = "direct";
     }
 
     try {
@@ -40,13 +40,12 @@ form.onsubmit = async (e) => {
             category: catSelect.value,
             url: videoInput, 
             videoType: videoType, 
-            thumbnail: thumbInput.value,
+            thumbnail: document.getElementById('v-thumb').value,
             description: document.getElementById('v-desc').value,
             views: 0,
             createdAt: serverTimestamp()
         });
-        alert("ভিডিও সফলভাবে পাবলিশ হয়েছে! 🎉");
+        alert("সাফল্য! ভিডিও পাবলিশ হয়েছে। 🎉");
         form.reset();
-        pImg.style.display = 'none';
     } catch (error) { alert("ভুল হয়েছে: " + error.message); }
 };
