@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ভিডিও দেখুন - ViralLink Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { background: #000; color: white; font-family: 'Poppins', sans-serif; margin: 0; }
@@ -20,22 +20,12 @@
 </head>
 <body>
     <div class="container">
-        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> হোমপেজে ফিরে যান</a>
-        
-        <div class="player-container" id="player-box">
-            <p>ভিডিও লোড হচ্ছে... ⏳</p>
-        </div>
-
+        <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> ফিরে যান</a>
+        <div class="player-container" id="player-box"><p>ভিডিও লোড হচ্ছে... ⏳</p></div>
         <div id="ad-banner-placeholder" style="text-align:center; margin: 20px 0;"></div>
-
-        <div class="details">
-            <h1 id="v-title">লোড হচ্ছে...</h1>
-            <p id="v-desc"></p>
-        </div>
+        <div class="details"><h1 id="v-title">লোড হচ্ছে...</h1><p id="v-desc"></p></div>
     </div>
-
     <script type="module">
-        // ঠিকানা পরিবর্তন করা হয়েছে যাতে লোডিং এ আটকে না থাকে
         import { db } from "/firebase/firebase-config.js";
         import { doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { initializeAds } from "./js/ads-loader.js";
@@ -45,35 +35,18 @@
 
         if (videoID) {
             const loadVideo = async () => {
-                try {
-                    const docRef = doc(db, "videos", videoID);
-                    const docSnap = await getDoc(docRef);
-                    
-                    if (docSnap.exists()) {
-                        const video = docSnap.data();
-                        document.getElementById('v-title').innerText = video.title;
-                        document.getElementById('v-desc').innerText = video.description || "";
-                        
-                        const playerBox = document.getElementById('player-box');
-                        
-                        // যদি ভিডিওটি আইফ্রেম (Embed) হয়
-                        if (video.videoType === "embed") {
-                            playerBox.innerHTML = video.url;
-                        } else {
-                            // যদি ভিডিওটি ডিরেক্ট লিঙ্ক (GitHub) হয়
-                            playerBox.innerHTML = `<video src="${video.url}" controls autoplay playsinline controlsList="nodownload"></video>`;
-                        }
-
-                        await updateDoc(docRef, { views: increment(1) });
-                        initializeAds();
-                    } else {
-                        alert("ভিডিওটি পাওয়া যায়নি!");
-                        window.location.href = "/";
-                    }
-                } catch (err) {
-                    console.error("Error:", err);
-                    document.getElementById('player-box').innerHTML = "<p style='color:red;'>ভিডিও লোড করতে সমস্যা হয়েছে।</p>";
-                }
+                const docRef = doc(db, "videos", videoID);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const video = docSnap.data();
+                    document.getElementById('v-title').innerText = video.title;
+                    document.getElementById('v-desc').innerText = video.description || "";
+                    const playerBox = document.getElementById('player-box');
+                    if (video.videoType === "embed") playerBox.innerHTML = video.url;
+                    else playerBox.innerHTML = `<video src="${video.url}" controls autoplay playsinline controlsList="nodownload"></video>`;
+                    await updateDoc(docRef, { views: increment(1) });
+                    initializeAds();
+                } else { alert("ভিডিও পাওয়া যায়নি!"); window.location.href="/"; }
             };
             loadVideo();
         }

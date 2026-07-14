@@ -5,101 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViralLink Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ডিজাইন */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #000; color: white; padding-bottom: 50px; overflow-x: hidden; }
-        nav { background: #000; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #222; min-height: 70px; }
-        .logo { text-decoration: none; display: flex; align-items: center; color: red; font-weight: bold; font-size: 1.5rem; }
-        .logo img { height: 50px; width: auto; object-fit: contain; }
-        #user-section { display: flex; align-items: center; gap: 15px; }
-        .btn { background: #ff0000; color: white; padding: 8px 18px; border-radius: 5px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; display: inline-block; }
-
-        /* ইনস্ট্রাকশন বক্স (Modal) */
-        #ad-guide-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
-        .modal-content { background: #111; border: 1px solid #333; padding: 30px; border-radius: 25px; max-width: 550px; width: 100%; text-align: center; }
-        .modal-header i { font-size: 3.5rem; color: #ff0000; margin-bottom: 15px; }
-        .modal-content h2 { font-size: 1.8rem; margin-bottom: 20px; color: gold; }
-        .steps-container { text-align: left; margin-bottom: 25px; }
-        .step { display: flex; align-items: flex-start; gap: 15px; background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #222; }
-        .step-num { background: #ff0000; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold; }
-        .btn-start { background: linear-gradient(to right, #ff0000, #b30000); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; font-size: 1.1rem; }
-
-        /* সার্চ ও ক্যাটাগরি */
+        body { background-color: #000; color: white; padding-bottom: 50px; }
+        nav { background: #000; padding: 15px 5%; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { color: red; text-decoration: none; font-weight: bold; font-size: 1.5rem; }
         .search-container { background: #000; padding: 20px 5%; }
         .search-box { position: relative; max-width: 600px; margin: 0 auto; }
-        .search-box input { width: 100%; padding: 15px 20px 15px 50px; border-radius: 30px; border: 1px solid #333; background: #111; color: white; outline: none; }
-        .search-box i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #555; }
-        .category-container { background: #000; padding: 10px 5%; display: flex; gap: 12px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; position: sticky; top: 75px; z-index: 999; border-bottom: 1px solid #111; }
-        .cat-pill { background: #222; color: white; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; border: 1px solid #333; }
-        .cat-pill.active { background: white; color: black; font-weight: 600; }
-
-        /* ভিডিও গ্রিড */
+        .search-box input { width: 100%; padding: 12px 15px 12px 45px; border-radius: 25px; background: #111; border: 1px solid #333; color: white; outline: none; }
+        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #555; }
+        .category-container { background: #000; padding: 10px 5%; display: flex; gap: 10px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+        .cat-pill { background: #222; color: white; padding: 8px 18px; border-radius: 20px; cursor: pointer; border: 1px solid #333; }
+        .cat-pill.active { background: white; color: black; }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .video-card { background: #111; border-radius: 12px; overflow: hidden; transition: 0.3s; text-decoration: none; color: white; display: block; border: 1px solid #222; }
-        .video-card:hover { transform: translateY(-5px); border-color: #ff0000; }
-        .thumb-box { width: 100%; aspect-ratio: 16/9; background: #222; overflow: hidden; }
+        .video-card { background: #111; border-radius: 10px; overflow: hidden; text-decoration: none; color: white; display: block; }
+        .thumb-box { width: 100%; aspect-ratio: 16/9; background: #222; }
         .thumbnail { width: 100%; height: 100%; object-fit: cover; }
-        .video-info { padding: 15px; }
-        .video-info h3 { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .video-info { padding: 12px; }
+        .btn { background: red; color: white; padding: 5px 15px; border-radius: 5px; border: none; cursor: pointer; }
+
+        /* নির্দেশনা বক্স */
+        #ad-guide-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+        .modal-content { background: #111; border: 1px solid #333; padding: 30px; border-radius: 20px; max-width: 500px; text-align: center; }
+        .step { text-align: left; background: #1a1a1a; padding: 15px; border-radius: 10px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- ১. নির্দেশনা বক্স -->
     <div id="ad-guide-modal">
         <div class="modal-content">
-            <div class="modal-header"><i class="fas fa-play-circle"></i></div>
-            <h2>কিভাবে ভিডিও দেখবেন?</h2>
-            <div class="steps-container">
-                <div class="step"><div class="step-num">১</div><div class="step-text"><b>ক্লিক করুন:</b> ভিডিওতে ক্লিক করলে নতুন ট্যাব বা অ্যাড আসতে পারে।</div></div>
-                <div class="step"><div class="step-num">২</div><div class="step-text"><b>ব্যাকে আসুন:</b> ফোনের Back বাটন চেপে আমাদের সাইটে ফিরে আসুন।</div></div>
-                <div class="step"><div class="step-num">৩</div><div class="step-text"><b>পুনরায় ক্লিক:</b> আবার ক্লিক করলেই ভিডিও চালু হবে।</div></div>
-            </div>
-            <button class="btn-start" id="understand-btn">ঠিক আছে, ভিডিও দেখান</button>
+            <h2 style="color:gold; margin-bottom:20px;">ভিডিও দেখার নিয়ম</h2>
+            <div class="step"><b>১. ক্লিক করুন:</b> ভিডিওতে ক্লিক করলে অ্যাড আসতে পারে।</div>
+            <div class="step"><b>২. ব্যাকে আসুন:</b> ফোনের Back বাটন চেপে আবার এখানে আসুন।</div>
+            <div class="step"><b>৩. পুনরায় ক্লিক:</b> এবার ভিডিওটি প্লে হবে।</div>
+            <button class="btn" style="width:100%; padding:15px; font-weight:bold; margin-top:10px;" id="understand-btn">ঠিক আছে, স্ট্রিমিং শুরু করুন</button>
         </div>
     </div>
 
-    <!-- ২. নেভিবার -->
     <nav>
-        <a href="/" class="logo">লোগো লোড হচ্ছে...</a>
-        <div id="user-section"><span>লোড হচ্ছে...</span></div>
+        <a href="/" class="logo" id="site-name-nav">ViralLink Video</a>
+        <div id="user-section">লোড হচ্ছে...</div>
     </nav>
 
-    <!-- ৩. অ্যাডের প্লেসহোল্ডার -->
-    <div id="ad-banner-placeholder" style="text-align:center; margin: 15px 0;"></div>
-
-    <!-- ৪. সার্চ ও ক্যাটাগরি -->
+    <div id="ad-banner-placeholder" style="text-align:center; margin: 10px 0;"></div>
     <div class="search-container"><div class="search-box"><i class="fas fa-search"></i><input type="text" id="search-input" placeholder="আপনার পছন্দের ভিডিও খুঁজুন..."></div></div>
     <div class="category-container" id="category-bar"><div class="cat-pill active" onclick="filterVideos('all', this)">সব ভিডিও</div></div>
-
-    <!-- ৫. ভিডিও লিস্ট -->
     <div class="container"><div class="video-grid" id="video-list"></div></div>
 
-    <!-- ৬. সব জাভাস্ক্রিপ্ট ফাইল কানেক্ট করা -->
     <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/main.js"></script>
     <script type="module">
         import { initializeAds } from "./js/ads-loader.js";
-
-        window.onload = function() {
-            // যদি আগে নোটিশ না দেখানো হয়ে থাকে
-            if (!sessionStorage.getItem('guideShown')) {
-                document.getElementById('ad-guide-modal').style.display = 'flex';
-            } else {
-                initializeAds();
-            }
-        };
-
-        document.getElementById('understand-btn').onclick = function() {
-            document.getElementById('ad-guide-modal').style.display = 'none';
-            sessionStorage.setItem('guideShown', 'true');
-            initializeAds(); // বাটন ক্লিকের ৫ সেকেন্ড পর অ্যাড লোড হবে
-        };
+        window.onload = () => { if(!sessionStorage.getItem('guideShown')) document.getElementById('ad-guide-modal').style.display='flex'; else initializeAds(); };
+        document.getElementById('understand-btn').onclick = () => { document.getElementById('ad-guide-modal').style.display='none'; sessionStorage.setItem('guideShown','true'); initializeAds(); };
     </script>
-
 </body>
 </html>
