@@ -1,78 +1,83 @@
-// admin/admin.js
+// admin/admin.js - Final Real-time & Auto-Menu Version
 import { auth, db } from "/firebase/firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { collection, getDocs, doc, getDoc, query, orderBy, limit, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { collection, onSnapshot, doc, getDoc, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const loadingScreen = document.getElementById('admin-loading');
 
+// ১. সিকিউরিটি চেক এবং ইনিশিয়ালাইজেশন
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        const userSnap = await getDoc(doc(db, "users", user.uid));
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
         if (userSnap.exists() && userSnap.data().role === "admin") {
-            document.getElementById('admin-name-top').innerText = user.displayName;
+            if(document.getElementById('admin-name-top')) document.getElementById('admin-name-top').innerText = user.displayName;
             setGreeting(user.displayName);
-            loadingScreen.style.display = 'none';
-            loadDashboardData();
+            if(loadingScreen) loadingScreen.style.display = 'none';
+            highlightActiveMenu();
+            listenToRealtimeStats();
         } else { window.location.href = "/"; }
     } else { window.location.href = "/"; }
 });
 
-// ১. স্মার্ট গ্রিটিং সেট করা
-function setGreeting(name) {
-    const hr = new Date().getHours();
-    let greet = "শুভ দিন";
-    if (hr < 12) greet = "শুভ সকাল";
-    else if (hr < 18) greet = "শুভ অপরাহ্ন";
-    else greet = "শুভ সন্ধ্যা";
-    document.getElementById('greeting-text').innerText = `${greet}, ${name.split(' ')[0]}! 👋`;
-    document.getElementById('current-date').innerText = new Date().toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+// ২. অটোমেটিক মেনু হাইলাইট করার ফাংশন (আপনার এক নাম্বার সমস্যার সমাধান)
+function highlightActiveMenu() {
+    const currentPath = window.location.pathname.split('/').pop();
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        const itemPath = item.getAttribute('href');
+        if (currentPath === itemPath) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
 }
 
-// ২. ডাটাবেস থেকে সব তথ্য আনা
-async function loadDashboardData() {
-    try {
-        const videoSnap = await getDocs(collection(db, "videos"));
-        const userSnap = await getDocs(collection(db, "users"));
-        const paymentSnap = await getDocs(collection(db, "premiumPayments"));
+// ৩. রিয়েল-টাইম ডাটা আপডেট (আপনার দুই নাম্বার সমস্যার সমাধান)
+function listenToRealtimeStats() {
+    if(!document.getElementById('stat-videos')) return; // শুধু ড্যাশবোর্ড পেজে কাজ করবে
 
-        // মোট ভিডিও ও ইউজার
-        document.getElementById('stat-videos').innerText = videoSnap.size;
-        document.getElementById('stat-users').innerText = userSnap.size;
+    // ভিডিও কাউন্ট আপডেট
+    onSnapshot(collection(db, "videos"), (snapshot) => {
+        document.getElementById('stat-videos').innerText = snapshot.size;
+    });
 
-        // প্রিমিয়াম ও পেন্ডিং হিসাব
+    // ইউজার কাউন্ট আপডেট
+    onSnapshot(collection(db, "users"), (snapshot) => {
+        document.getElementById('stat-users').innerText = snapshot.size;
         let premiumCount = 0;
-        userSnap.forEach(d => { if(d.data().premium) premiumCount++; });
+        snapshot.forEach(d => { if(d.data().premium) premiumCount++; });
         document.getElementById('stat-premium').innerText = premiumCount;
+    });
 
-        let pendingCount = 0;
-        let totalRevenue = 0;
-        paymentSnap.forEach(d => {
-            if(d.data().status === 'pending') pendingCount++;
-            if(d.data().status === 'approved') totalRevenue += parseInt(d.data().amount || 0);
+    // পেমেন্ট ও রেভিনিউ আপডেট
+    onSnapshot(collection(db, "premiumPayments"), (snapshot) => {
+        let pending = 0;
+        let revenue = 0;
+        snapshot.forEach(d => {
+            if(d.data().status === 'pending') pending++;
+            if(d.data().status === 'approved') revenue += parseInt(d.data().amount || 0);
         });
-        document.getElementById('stat-pending').innerText = pendingCount;
-        document.getElementById('stat-revenue').innerText = totalRevenue + " ৳";
+        document.getElementById('stat-pending').innerText = pending;
+        document.getElementById('stat-revenue').innerText = revenue + "৳";
+    });
 
-        // শেষ ৫টি ভিডিও
-        const recentV = query(collection(db, "videos"), orderBy("createdAt", "desc"), limit(5));
-        const recentVSnap = await getDocs(recentV);
+    // শেষ ৫টি ভিডিও রিয়েল-টাইম
+    const qRecent = query(collection(db, "videos"), orderBy("createdAt", "desc"), limit(5));
+    onSnapshot(qRecent, (snapshot) => {
         const vList = document.getElementById('recent-videos-list');
+        if(!vList) return;
         vList.innerHTML = '';
-        recentVSnap.forEach(d => {
-            vList.innerHTML += `<tr><td>${d.data().title}</td><td>${d.data().views || 0}</td><td>${new Date(d.data().createdAt?.toDate()).toLocaleDateString('bn-BD')}</td></tr>`;
+        snapshot.forEach(d => {
+            vList.innerHTML += `<tr><td>${d.data().title.substring(0,25)}</td><td>${d.data().views || 0}</td><td>${new Date(d.data().createdAt?.toDate()).toLocaleDateString('bn-BD')}</td></tr>`;
         });
+    });
+}
 
-        // টপ ৩ ভিডিও
-        const topV = query(collection(db, "videos"), orderBy("views", "desc"), limit(3));
-        const topVSnap = await getDocs(topV);
-        const topList = document.getElementById('top-videos-list');
-        topList.innerHTML = '';
-        topVSnap.forEach(d => {
-            topList.innerHTML += `<div style="background:#222; padding:10px; border-radius:10px; margin-bottom:10px; border-left:3px solid gold;">
-                <p style="font-size:0.85rem;">${d.data().title}</p>
-                <small style="color:#888;">${d.data().views || 0} ভিউজ</small>
-            </div>`;
-        });
-
-    } catch (e) { console.error(e); }
+function setGreeting(name) {
+    const hr = new Date().getHours();
+    let greet = (hr < 12) ? "शुभ সকাল" : (hr < 18) ? "শুভ অপরাহ্ন" : "শুভ সন্ধ্যা";
+    if(document.getElementById('greeting-text')) document.getElementById('greeting-text').innerText = `${greet}, ${name.split(' ')[0]}! 👋`;
+    if(document.getElementById('current-date')) document.getElementById('current-date').innerText = new Date().toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 }

@@ -1,63 +1,45 @@
-<!-- public/watch.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ভিডিও দেখুন - ViralLink Video</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>ভিডিও দেখুন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body { background: #000; color: white; font-family: 'Poppins', sans-serif; margin: 0; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 10px; }
-        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 10px; overflow: hidden; border: 1px solid #333; }
-        video { width: 100%; height: 100%; outline: none; }
-        .details { margin-top: 20px; background: #111; padding: 20px; border-radius: 10px; }
-        h1 { font-size: 1.5rem; margin-bottom: 10px; color: #ff0000; }
-        p { color: #ccc; line-height: 1.6; white-space: pre-wrap; }
-        .back-btn { display: inline-block; color: white; text-decoration: none; margin-bottom: 20px; background: #333; padding: 8px 15px; border-radius: 5px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 10px; }
+        .player-container { width: 100%; aspect-ratio: 16/9; background: #111; border-radius: 12px; overflow: hidden; border: 1px solid #333; position: relative; }
+        video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .details { margin-top: 15px; background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222; }
+        h1 { font-size: 1.1rem; color: #ff0000; }
+        .back-btn { display: inline-block; color: #888; text-decoration: none; margin: 15px 0; font-size: 0.8rem; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="/" class="back-btn">← ফিরে যান</a>
-        <div class="player-container">
-            <video id="main-player" controls autoplay playsinline controlsList="nodownload"></video>
-        </div>
-
-        <!-- ১. ভিডিওর ঠিক নিচে ব্যানার অ্যাড দেখা যাবে -->
+        <div class="player-container"><video id="main-player" controls autoplay playsinline controlsList="nodownload"></video></div>
         <div id="ad-banner-placeholder" style="text-align:center; margin: 20px 0;"></div>
-
-        <div class="details">
-            <h1 id="v-title">লোড হচ্ছে...</h1>
-            <p id="v-desc"></p>
-        </div>
+        <div class="details"><h1 id="v-title">লোড হচ্ছে...</h1><p id="v-desc" style="color:#888; font-size:0.85rem; margin-top:10px;"></p></div>
     </div>
-
     <script type="module">
         import { db } from "/firebase/firebase-config.js";
         import { doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
         const urlParams = new URLSearchParams(window.location.search);
         const videoID = urlParams.get('v');
-
         if (videoID) {
-            const loadVideo = async () => {
+            const load = async () => {
                 const docRef = doc(db, "videos", videoID);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    const video = docSnap.data();
-                    document.getElementById('v-title').innerText = video.title;
-                    document.getElementById('v-desc').innerText = video.description;
-                    const player = document.getElementById('main-player');
-                    player.src = video.url;
+                    const v = docSnap.data();
+                    document.getElementById('v-title').innerText = v.title;
+                    document.getElementById('v-desc').innerText = v.description || "";
+                    document.getElementById('main-player').src = v.url;
                     await updateDoc(docRef, { views: increment(1) });
                 }
-            };
-            loadVideo();
+            }; load();
         }
     </script>
-
-    <!-- ২. অ্যাড লোডার কানেক্ট করা -->
-    <script type="module" src="./js/ads-loader.js"></script>
 </body>
 </html>
