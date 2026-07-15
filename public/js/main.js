@@ -1,4 +1,5 @@
-// public/js/main.js
+// public/js/main.js (টাইটেল এবং ডেসক্রিপশন সার্চ সাপোর্টসহ)
+
 import { db } from "/firebase/firebase-config.js";
 import { collection, getDocs, query, orderBy, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -7,6 +8,7 @@ const categoryBar = document.getElementById('category-bar');
 const searchInput = document.getElementById('search-input');
 let allVideosData = [];
 
+// ১. ওয়েবসাইট সেটিংস (নাম, লোগো, এসইও) লোড করা
 const loadSiteSettings = async () => {
     try {
         const genSnap = await getDoc(doc(db, "websiteSettings", "general"));
@@ -16,14 +18,16 @@ const loadSiteSettings = async () => {
             if (genData.logo) logoEl.innerHTML = `<img src="${genData.logo}" alt="${genData.name}" style="height: 60px; width: auto; object-fit: contain; display: block;">`;
             else logoEl.innerText = genData.name || "ViralLink Video";
         }
+
         const seoSnap = await getDoc(doc(db, "websiteSettings", "seo"));
         if (seoSnap.exists()) {
             const seoData = seoSnap.data();
             document.title = seoData.title || "ViralLink Video";
         }
-    } catch (error) { console.error(error); }
+    } catch (error) { console.error("Settings Load Error:", error); }
 };
 
+// ২. ডাটাবেস থেকে ক্যাটাগরি আনা
 const fetchCategories = async () => {
     try {
         const querySnapshot = await getDocs(collection(db, "categories"));
@@ -38,6 +42,7 @@ const fetchCategories = async () => {
     } catch (error) { console.error(error); }
 };
 
+// ৩. ভিডিও স্ক্রিনে রেন্ডার করা
 const renderVideos = (videos) => {
     videoList.innerHTML = '';
     if (videos.length === 0) {
@@ -56,24 +61,36 @@ const renderVideos = (videos) => {
     });
 };
 
-searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = allVideosData.filter(v => v.title.toLowerCase().includes(term));
-    renderVideos(filtered);
-});
+// ৪. উন্নত সার্চ লজিক (টাইটেল + ডেসক্রিপশন)
+if(searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+        
+        const filtered = allVideosData.filter(v => {
+            const titleMatch = v.title.toLowerCase().includes(term);
+            const descMatch = v.description && v.description.toLowerCase().includes(term);
+            
+            // টাইটেল অথবা ডেসক্রিপশন—যেকোনো এক জায়গায় মিললেই ভিডিওটি দেখাবে
+            return titleMatch || descMatch;
+        });
+        
+        renderVideos(filtered);
+    });
+}
 
+// ৫. ক্যাটাগরি ফিল্টার
 window.filterVideos = async (catId, element) => {
     document.querySelectorAll('.cat-pill').forEach(el => el.classList.remove('active'));
     element.classList.add('active');
     if (catId === 'all') {
         renderVideos(allVideosData);
     } else {
-        // এখানে আপডেট করা হয়েছে: ভিডিওর ক্যাটাগরি লিস্টে catId আছে কি না চেক করছে
         const filtered = allVideosData.filter(v => v.categories && v.categories.includes(catId));
         renderVideos(filtered);
     }
 };
 
+// ৬. সব ভিডিও ডাটাবেস থেকে লোড করা
 const fetchAllVideos = async () => {
     try {
         const q = query(collection(db, "videos"), orderBy("createdAt", "desc"));
@@ -86,6 +103,7 @@ const fetchAllVideos = async () => {
     } catch (error) { console.error(error); }
 };
 
+// সব কিছু শুরু করা
 loadSiteSettings();
 fetchCategories();
 fetchAllVideos();
