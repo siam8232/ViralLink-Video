@@ -1,43 +1,39 @@
+<!-- admin/index.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অ্যাডমিন ড্যাশবোর্ড</title>
+    <title>ViralLink Video - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
 </head>
 <body>
-    <div id="admin-loading"><h2>সিস্টেম লোড হচ্ছে...</h2></div>
+    <div id="admin-loading"><h2>সিকিউরিটি চেক করা হচ্ছে... 🛡️</h2></div>
+
     <div class="sidebar">
-        <h2>ViralLink</h2>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
-        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
-        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
-        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
-        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
-        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
-        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
-        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>সেটিংস</span></a>
-        <a href="/" class="menu-item" style="color:red;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট</span></a>
+        <h2>ViralLink Admin</h2>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> SEO সেটিংস</a>
+        <a href="settings.html" class="menu-item active"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
+        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
     </div>
+
     <div class="main-content">
-        <div class="greeting-section">
-            <h1 id="greeting-text">লোড হচ্ছে...</h1>
-            <p id="current-date"></p>
-        </div>
+        <h1>স্বাগতম, <span id="admin-name">অ্যাডমিন</span></h1>
         <div class="stats-grid">
-            <div class="stat-card"><p>মোট ভিডিও</p><h3 id="stat-videos">০</h3></div>
-            <div class="stat-card"><p>মোট ইউজার</p><h3 id="stat-users">০</h3></div>
-            <div class="stat-card"><p>প্রিমিয়াম</p><h3 id="stat-premium">০</h3></div>
-            <div class="stat-card"><p>পেন্ডিং</p><h3 id="stat-pending">০</h3></div>
-            <div class="stat-card"><p>মোট আয়</p><h3 id="stat-revenue">০৳</h3></div>
-        </div>
-        <div class="activity-container">
-            <div class="activity-box"><h3>সাম্প্রতিক ভিডিও</h3><table><thead><tr><th>টাইটেল</th><th>ভিউ</th></tr></thead><tbody id="recent-videos-list"></tbody></table></div>
+            <div class="stat-card"><h3>০</h3><p>মোট ভিডিও</p></div>
+            <div class="stat-card"><h3>১</h3><p>মোট ইউজার</p></div>
         </div>
     </div>
+
     <script type="module" src="admin.js"></script>
 </body>
 </html>

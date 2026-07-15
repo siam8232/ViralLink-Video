@@ -1,30 +1,10 @@
-/* admin/admin-style.css */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-body { background-color: #0b0b0b; color: white; display: flex; min-height: 100vh; }
-
-/* Sidebar */
-.sidebar { width: 260px; background-color: #000; height: 100vh; padding: 20px; position: fixed; border-right: 1px solid #222; z-index: 1000; }
-.sidebar h2 { color: #ff0000; font-size: 1.4rem; margin-bottom: 30px; text-align: center; font-weight: 700; }
-.menu-item { padding: 12px 15px; color: #888; text-decoration: none; display: block; border-radius: 10px; margin-bottom: 5px; transition: 0.3s; font-size: 0.9rem; }
-.menu-item i { margin-right: 10px; width: 20px; }
-.menu-item:hover, .menu-item.active { background: #ff0000 !important; color: white !important; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
-
-/* Main Content */
-.main-content { margin-left: 260px; padding: 30px; width: calc(100% - 260px); }
-
-/* Greeting & Stats */
-.greeting-section { margin-bottom: 30px; background: #151515; padding: 20px; border-radius: 15px; border: 1px solid #222; }
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
-.stat-card { background: #121212; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; border-bottom: 4px solid #333; }
-.stat-card h3 { font-size: 1.8rem; color: #ffcc00; }
-
-/* মোবাইল রেসপন্সিভ (ডিজাইন না বদলিয়ে শুধু সাইজ ঠিক করা) */
-@media (max-width: 900px) {
-    body { flex-direction: column; }
-    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #222; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; padding: 10px; }
-    .sidebar h2 { width: 100%; margin-bottom: 10px; }
-    .main-content { margin-left: 0; width: 100%; padding: 15px; }
-    .menu-item { padding: 8px 12px; font-size: 0.75rem; }
-}
-
+body { background-color: #1a1a1a; color: white; font-family: 'Poppins', sans-serif; margin: 0; display: flex; }
+.sidebar { width: 250px; background-color: #000; height: 100vh; padding: 20px; position: fixed; }
+.sidebar h2 { color: #ff0000; font-size: 1.5rem; margin-bottom: 30px; text-align: center; }
+.menu-item { padding: 15px; color: #ccc; text-decoration: none; display: block; border-radius: 10px; margin-bottom: 5px; transition: 0.3s; }
+.menu-item:hover, .menu-item.active { background-color: #ff0000; color: white; }
+.main-content { margin-left: 250px; padding: 40px; width: 100%; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.stat-card { background-color: #252525; padding: 20px; border-radius: 15px; border-left: 5px solid #ff0000; text-align: center; }
 #admin-loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+.btn { background: red; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; cursor: pointer; border: none; }
