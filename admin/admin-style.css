@@ -1,71 +1,30 @@
-/* admin/admin-style.css - Fixed & Fully Responsive */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+/* admin/admin-style.css */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: #0b0b0b; color: white; display: flex; min-height: 100vh; }
 
-:root {
-    --primary: #ff0000;
-    --bg-dark: #080808;
-    --card-bg: #121212;
-    --sidebar-bg: #000;
-    --border: #222;
-    --gold: #ffcc00;
-}
-
-body { background-color: var(--bg-dark); color: white; display: flex; min-height: 100vh; overflow-x: hidden; }
-
-/* Sidebar - Responsive */
-.sidebar { width: 260px; background-color: var(--sidebar-bg); height: 100vh; padding: 25px 15px; position: fixed; border-right: 1px solid var(--border); transition: 0.4s; z-index: 1000; }
-.sidebar h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 30px; text-align: center; font-weight: 800; border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
-
-.menu-item { padding: 12px 15px; color: #888; text-decoration: none; display: flex; align-items: center; border-radius: 10px; margin-bottom: 5px; transition: 0.3s; font-size: 0.9rem; }
-.menu-item i { margin-right: 12px; width: 20px; text-align: center; font-size: 1.1rem; }
-.menu-item:hover, .menu-item.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
+/* Sidebar */
+.sidebar { width: 260px; background-color: #000; height: 100vh; padding: 20px; position: fixed; border-right: 1px solid #222; z-index: 1000; }
+.sidebar h2 { color: #ff0000; font-size: 1.4rem; margin-bottom: 30px; text-align: center; font-weight: 700; }
+.menu-item { padding: 12px 15px; color: #888; text-decoration: none; display: block; border-radius: 10px; margin-bottom: 5px; transition: 0.3s; font-size: 0.9rem; }
+.menu-item i { margin-right: 10px; width: 20px; }
+.menu-item:hover, .menu-item.active { background: #ff0000 !important; color: white !important; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
 
 /* Main Content */
-.main-content { margin-left: 260px; padding: 30px; width: calc(100% - 260px); transition: 0.4s; }
+.main-content { margin-left: 260px; padding: 30px; width: calc(100% - 260px); }
 
-/* Greeting Area */
-.greeting-section { margin-bottom: 30px; background: linear-gradient(135deg, #1a1a1a, #000); padding: 25px; border-radius: 20px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.greeting-section h1 { font-size: 1.8rem; font-weight: 700; }
-.greeting-section p { color: #888; font-size: 0.9rem; margin-top: 5px; }
+/* Greeting & Stats */
+.greeting-section { margin-bottom: 30px; background: #151515; padding: 20px; border-radius: 15px; border: 1px solid #222; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 30px; }
+.stat-card { background: #121212; padding: 20px; border-radius: 15px; border: 1px solid #222; text-align: center; border-bottom: 4px solid #333; }
+.stat-card h3 { font-size: 1.8rem; color: #ffcc00; }
 
-/* Stats Grid */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-.stat-card { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid var(--border); text-align: center; transition: 0.3s; border-bottom: 4px solid #333; }
-.stat-card:hover { transform: translateY(-5px); border-bottom-color: var(--primary); }
-.stat-card h3 { font-size: 2.2rem; color: var(--gold); margin: 5px 0; font-weight: 700; }
-.stat-card p { color: #888; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; }
-
-/* Activity Container */
-.activity-container { display: grid; grid-template-columns: 1.5fr 1fr; gap: 25px; }
-.activity-box { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--border); }
-.activity-box h3 { margin-bottom: 20px; font-size: 1.1rem; color: var(--primary); display: flex; align-items: center; gap: 10px; }
-
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
-th { color: #555; text-transform: uppercase; font-weight: bold; }
-
-/* Mobile Menu Toggle Button (Visible only on mobile) */
-.mobile-toggle { display: none; background: var(--primary); color: white; padding: 10px; border: none; border-radius: 5px; position: fixed; top: 15px; right: 15px; z-index: 1001; cursor: pointer; }
-
-/* LOADING SCREEN */
-#admin-loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-
-/* --- RESPONSIVE MEDIA QUERIES --- */
-@media (max-width: 1024px) {
-    .sidebar { width: 80px; padding: 20px 10px; }
-    .sidebar h2, .menu-item span { display: none; }
-    .main-content { margin-left: 80px; width: calc(100% - 80px); }
-    .activity-container { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
+/* মোবাইল রেসপন্সিভ (ডিজাইন না বদলিয়ে শুধু সাইজ ঠিক করা) */
+@media (max-width: 900px) {
     body { flex-direction: column; }
-    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border); padding: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
-    .sidebar h2 { width: 100%; margin-bottom: 10px; border: none; font-size: 1.2rem; }
-    .menu-item { padding: 8px; font-size: 0.75rem; margin-bottom: 0; }
+    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #222; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; padding: 10px; }
+    .sidebar h2 { width: 100%; margin-bottom: 10px; }
     .main-content { margin-left: 0; width: 100%; padding: 15px; }
-    .greeting-section { flex-direction: column; text-align: center; gap: 15px; }
-    .greeting-section div { text-align: center !important; }
+    .menu-item { padding: 8px 12px; font-size: 0.75rem; }
 }
+
+#admin-loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 9999; }
