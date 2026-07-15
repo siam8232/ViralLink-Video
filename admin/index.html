@@ -1,11 +1,9 @@
-<!-- admin/index.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>প্রিমিয়াম অ্যাডমিন ড্যাশবোর্ড</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
 </head>
@@ -15,72 +13,53 @@
         <h2 style="color: white;">সিস্টেম লোড হচ্ছে... 🛡️</h2>
     </div>
 
-    <!-- সাইডবার (আপনার দেওয়া সিরিয়াল অনুযায়ী) -->
     <div class="sidebar">
-        <h2>ViralLink Admin</h2>
-        <a href="index.html" class="menu-item active"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
-        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
-        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
-        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
-        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
-        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
-        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> SEO সেটিংস</a>
-        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
-        <a href="/" class="menu-item" style="margin-top:20px; color:red; border: 1px solid #222;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
+        <h2>ViralLink</h2>
+        <a href="index.html" class="menu-item active"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
+        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
+        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>সেটিংস</span></a>
+        <a href="/" class="menu-item" style="margin-top:20px; color:red;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট</span></a>
     </div>
 
     <div class="main-content">
-        <!-- ১. স্মার্ট গ্রিটিং সেকশন -->
+        <!-- স্মার্ট গ্রিটিং -->
         <div class="greeting-section">
             <div>
                 <h1 id="greeting-text">লোড হচ্ছে...</h1>
                 <p id="current-date"></p>
             </div>
             <div style="text-align: right;">
-                <span id="admin-name-top" style="font-weight: bold; color: gold;"></span><br>
-                <small style="color: #28a745;"><i class="fas fa-circle"></i> সার্ভার অনলাইন</small>
+                <span id="admin-name-top" style="font-weight: bold; color: gold; font-size: 1.1rem;"></span><br>
+                <small style="color: #28a745;"><i class="fas fa-circle" style="font-size: 8px;"></i> সিস্টেম অনলাইন</small>
             </div>
         </div>
 
-        <!-- ২. শক্তিশালী স্ট্যাটাস কার্ডস -->
+        <!-- তথ্য কার্ডস -->
         <div class="stats-grid">
-            <div class="stat-card">
-                <p>মোট ভিডিও</p>
-                <h3 id="stat-videos">০</h3>
-            </div>
-            <div class="stat-card">
-                <p>মোট ইউজার</p>
-                <h3 id="stat-users">০</h3>
-            </div>
-            <div class="stat-card">
-                <p>প্রিমিয়াম ইউজার</p>
-                <h3 id="stat-premium">০</h3>
-            </div>
-            <div class="stat-card">
-                <p>পেন্ডিং পেমেন্ট</p>
-                <h3 id="stat-pending" style="color: #ff4d4d;">০</h3>
-            </div>
-            <div class="stat-card">
-                <p>মোট আয় (BDT)</p>
-                <h3 id="stat-revenue">০</h3>
-            </div>
+            <div class="stat-card"><p>মোট ভিডিও</p><h3 id="stat-videos">০</h3></div>
+            <div class="stat-card"><p>মোট ইউজার</p><h3 id="stat-users">০</h3></div>
+            <div class="stat-card"><p>প্রিমিয়াম মেম্বার</p><h3 id="stat-premium">০</h3></div>
+            <div class="stat-card"><p>পেন্ডিং পেমেন্ট</p><h3 id="stat-pending" style="color: #ff4d4d;">০</h3></div>
+            <div class="stat-card"><p>মোট আয় (BDT)</p><h3 id="stat-revenue">০৳</h3></div>
         </div>
 
-        <!-- ৩. রিসেন্ট অ্যাক্টিভিটি টেবিল -->
+        <!-- অ্যাক্টিভিটি এবং ট্রেন্ডিং -->
         <div class="activity-container">
-            <!-- সাম্প্রতিক ভিডিও -->
             <div class="activity-box">
-                <h3><i class="fas fa-history"></i> শেষ ৫টি ভিডিও</h3>
+                <h3><i class="fas fa-history"></i> সাম্প্রতিক ৫টি ভিডিও</h3>
                 <table>
-                    <thead><tr><th>ভিডিও</th><th>ভিউ</th><th>তারিখ</th></tr></thead>
+                    <thead><tr><th>টাইটেল</th><th>ভিউ</th><th>তারিখ</th></tr></thead>
                     <tbody id="recent-videos-list"></tbody>
                 </table>
             </div>
-
-            <!-- টপ ভিডিও -->
             <div class="activity-box">
-                <h3><i class="fas fa-fire"></i> টপ ৩ ট্রেন্ডিং</h3>
+                <h3><i class="fas fa-fire"></i> টপ ৩ ভিডিও (Trending)</h3>
                 <div id="top-videos-list"></div>
             </div>
         </div>
