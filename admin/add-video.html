@@ -1,67 +1,100 @@
-<!-- admin/add-video.html -->
+<!-- public/admin/add-video.html -->
 <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>নতুন ভিডিও যোগ করুন - ViralLink Admin</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="admin-style.css">
     <style>
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; color: #ccc; }
-        input, textarea, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background: #222; color: white; }
-        .preview-img { width: 200px; height: 120px; border: 1px dashed #666; margin-top: 10px; display: flex; align-items: center; justify-content: center; }
-        .preview-img img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        /* মাল্টিপল ক্যাটাগরি বক্সের জন্য ডিজাইন */
+        .category-checkbox-list {
+            background: #111;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .cat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #ccc;
+        }
+        .cat-item input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div id="admin-loading"><h2>চেক করা হচ্ছে...</h2></div>
+
+    <div id="admin-loading">
+        <h2 style="color: white; text-align: center;">চেক করা হচ্ছে... 🛡️</h2>
+    </div>
+
     <div class="sidebar">
         <h2>ViralLink Admin</h2>
-        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> ড্যাশবোর্ড</a>
-        <a href="add-video.html" class="menu-item"><i class="fas fa-plus-circle"></i> ভিডিও যোগ করুন</a>
-        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> সব ভিডিও</a>
-        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> ক্যাটাগরি</a>
-        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> ইউজার লিস্ট</a>
-        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> পেমেন্ট রিকোয়েস্ট</a>
-        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> অ্যাড ম্যানেজার</a>
-        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> SEO সেটিংস</a>
-        <a href="settings.html" class="menu-item active"><i class="fas fa-cog"></i> ওয়েবসাইট সেটিংস</a>
-        <a href="/" class="menu-item" style="margin-top:50px; color:red;"><i class="fas fa-arrow-left"></i> ওয়েবসাইট দেখুন</a>
+        <a href="index.html" class="menu-item"><i class="fas fa-home"></i> <span>ড্যাশবোর্ড</span></a>
+        <a href="add-video.html" class="menu-item active"><i class="fas fa-plus-circle"></i> <span>ভিডিও যোগ করুন</span></a>
+        <a href="all-videos.html" class="menu-item"><i class="fas fa-video"></i> <span>সব ভিডিও</span></a>
+        <a href="categories.html" class="menu-item"><i class="fas fa-list"></i> <span>ক্যাটাগরি</span></a>
+        <a href="users.html" class="menu-item"><i class="fas fa-users"></i> <span>ইউজার লিস্ট</span></a>
+        <a href="payments.html" class="menu-item"><i class="fas fa-money-bill-wave"></i> <span>পেমেন্ট রিকোয়েস্ট</span></a>
+        <a href="ads.html" class="menu-item"><i class="fas fa-ad"></i> <span>অ্যাড ম্যানেজার</span></a>
+        <a href="seo.html" class="menu-item"><i class="fas fa-search"></i> <span>SEO সেটিংস</span></a>
+        <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> <span>ওয়েবসাইট সেটিংস</span></a>
+        <a href="/" class="menu-item" style="margin-top:20px; color:#ff4d4d; border: 1px solid #333;"><i class="fas fa-arrow-left"></i> <span>ওয়েবসাইট দেখুন</span></a>
     </div>
 
     <div class="main-content">
-        <h1>নতুন ভিডিও যোগ করুন</h1>
-        <form id="video-form" style="max-width: 800px; background: #252525; padding: 30px; border-radius: 15px;">
+        <h1>নতুন ভিডিও আপলোড করুন</h1>
+        
+        <form id="video-form">
             <div class="form-group">
-                <label>ভিডিওর টাইটেল</label>
-                <input type="text" id="v-title" required>
+                <label>ভিডিওর টাইটেল (Title)</label>
+                <input type="text" id="v-title" placeholder="ভিডিওর সুন্দর একটি নাম দিন" required>
             </div>
-            <!-- ক্যাটাগরি ড্রপডাউন -->
+
+            <!-- মাল্টিপল ক্যাটাগরি সিলেকশন এরিয়া -->
             <div class="form-group">
-                <label>ক্যাটাগরি সিলেক্ট করুন</label>
-                <select id="v-category" required>
-                    <option value="">ক্যাটাগরি লোড হচ্ছে...</option>
-                </select>
+                <label>ক্যাটাগরি সিলেক্ট করুন (একাধিক সম্ভব)</label>
+                <div id="v-category-list" class="category-checkbox-list">
+                    <!-- ক্যাটাগরিগুলো এখানে জাভাস্ক্রিপ্ট দিয়ে আসবে -->
+                    <p style="font-size: 0.8rem; color: #555;">ক্যাটাগরি লোড হচ্ছে...</p>
+                </div>
             </div>
+
             <div class="form-group">
                 <label>GitHub ভিডিও লিঙ্ক</label>
-                <input type="url" id="v-url" required>
+                <input type="url" id="v-url" placeholder="https://github.com/..." required>
             </div>
+
             <div class="form-group">
-                <label>ImageBB থাম্বনেইল লিঙ্ক</label>
-                <input type="url" id="v-thumb" required>
-                <div class="preview-img" id="thumb-preview"><span>প্রিভিউ নেই</span><img id="p-img"></div>
+                <label>ImageBB থাম্বনেইল লিঙ্ক (URL)</label>
+                <input type="url" id="v-thumb" placeholder="ছবির ডিরেক্ট লিঙ্ক দিন" required>
             </div>
+
             <div class="form-group">
-                <label>ডেসক্রিপশন</label>
-                <textarea id="v-desc" rows="4"></textarea>
+                <label>ভিডিওর বিস্তারিত (Description)</label>
+                <textarea id="v-desc" rows="4" placeholder="ভিডিও সম্পর্কে কিছু লিখুন..."></textarea>
             </div>
-            <button type="submit" class="btn" style="width: 100%; padding: 15px;">ভিডিও পাবলিশ করুন</button>
+
+            <button type="submit" class="btn" style="width: 100%; font-size: 1.1rem;">ভিডিও পাবলিশ করুন 🚀</button>
         </form>
     </div>
+
+    <script type="module" src="admin.js"></script>
     <script type="module" src="video-manager.js"></script>
+
 </body>
 </html>
